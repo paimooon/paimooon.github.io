@@ -51,7 +51,7 @@ $.ajaxSetup({
     contentType: "application/json; charset=utf-8"
 });
 
-$.getJSON('https://whatever-origin.herokuapp.com/get?url' + 
+$.getJSON('https://whatever-origin.herokuapp.com/get?url=' + 
     encodeURIComponent('https://api-beta-sdk-os-static.mihoyo.com/hk4e_global/mdk/launcher/api/resource?key=WIypZbGH&launcher_id=10') + '&callback=?',
     function (data) {
         var game_ver = data.contents.data.game.latest.version;
