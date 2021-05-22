@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Paimooon</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+h1, p, div{
+    margin-top: 40px !important;
+    text-align: center;
+}
+.btn-primary, .btn-secondary{
+    color: white !important;
+}
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Genshin Client Direct Download</h1>
+    <p id='p_game_ver'>Latest version : </p> 
+    <a id="p_game_url" class="btn btn-primary">Download</a>
+    <p id='p_game_ver2'>Latest Beta version : </p> 
+    <a id="p_game_url2" class="btn btn-secondary">Loading...</a>
+</div>
+
+<script>
+
+var request = new XMLHttpRequest();
+var url = "https://sdk-os-static.mihoyo.com/hk4e_global/mdk/launcher/api/resource?key=gcStgarh&launcher_id=10";
+
+request.open("GET", url);
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+    var game_ver = request.response.data.game.latest.version;
+    var game_url = request.response.data.game.latest.path;
+
+    document.getElementById("p_game_ver").innerHTML = "Latest version : " + game_ver;
+    document.getElementById("p_game_url").href = game_url;
+}
+
+</script>
+
+<script>
+$.ajaxSetup({
+    scriptCharset: "utf-8", //or "ISO-8859-1"
+    contentType: "application/json; charset=utf-8"
+});
+
+$.getJSON('http://whateverorigin.org/get?url=' + 
+    encodeURIComponent('https://api-beta-sdk-os-static.mihoyo.com/hk4e_global/mdk/launcher/api/resource?key=WIypZbGH&launcher_id=10') + '&callback=?',
+    function (data) {
+        var game_ver = data.contents.data.game.latest.version;
+        var game_url = data.contents.data.game.latest.path;
+
+        document.getElementById("p_game_ver2").innerHTML = "Latest Beta version : " + game_ver;
+        document.getElementById("p_game_url2").href = game_url;
+
+        document.getElementById("p_game_url2").className = "btn btn-primary";
+        document.getElementById("p_game_url2").innerHTML = "Download";
+});
+</script>
+
+</body>
+</html>
