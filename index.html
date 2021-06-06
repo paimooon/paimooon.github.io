@@ -22,7 +22,7 @@ h1, p, div{
     <h1>Genshin Client Direct Download</h1>
     <p id='p_game_ver'>Latest version : </p> 
     <a id="p_game_url" class="btn btn-primary">Download</a>
-    <p id='p_game_ver2'>Latest Beta version : </p> 
+    <p id='p_game_ver2'>Latest Known Beta version : </p> 
     <a id="p_game_url2" class="btn btn-secondary">Loading...</a>
 </div>
 
@@ -57,7 +57,7 @@ $.getJSON('https://whatever-origin.herokuapp.com/get?url=' +
         var game_ver = data.contents.data.game.latest.version;
         var game_url = data.contents.data.game.latest.path;
 
-        document.getElementById("p_game_ver2").innerHTML = "Latest Beta version : " + game_ver;
+        document.getElementById("p_game_ver2").innerHTML = "Latest Known Beta version : " + game_ver;
         document.getElementById("p_game_url2").href = game_url;
 
         document.getElementById("p_game_url2").className = "btn btn-primary";
