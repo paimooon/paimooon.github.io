@@ -22,8 +22,6 @@ h1, p, div{
     <h1>Genshin Client Direct Download</h1>
     <p id='p_game_ver'>Latest version : </p> 
     <a id="p_game_url" class="btn btn-primary">Download</a>
-    <p id='p_game_verr'>Pre-download : </p> 
-    <a id="p_game_urll" class="btn btn-primary">Download</a>
     <p id='p_game_ver2'>Latest Known Beta version : </p> 
     <a id="p_game_url2" class="btn btn-secondary">Loading...</a>
 </div>
@@ -40,13 +38,9 @@ request.send();
 request.onload = function() {
     var game_ver = request.response.data.game.latest.version;
     var game_url = request.response.data.game.latest.path;
-    var game_verr = request.response.data.pre_download_game.latest.version;
-    var game_urll = request.response.data.pre_download_game.latest.path;
 
     document.getElementById("p_game_ver").innerHTML = "Latest version : " + game_ver;
     document.getElementById("p_game_url").href = game_url;
-    document.getElementById("p_game_verr").innerHTML = "Pre-download : " + game_verr;
-    document.getElementById("p_game_urll").href = game_urll;
 }
 
 </script>
