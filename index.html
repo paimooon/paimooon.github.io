@@ -22,8 +22,8 @@ h1, p, div{
     <h1>Genshin Client Direct Download</h1>
     <p id='p_game_ver'>Latest version : </p> 
     <a id="p_game_url" class="btn btn-primary">Download</a>
-    <p id='p_game_ver2'>Latest Known Beta version : </p> 
-    <a id="p_game_url2" class="btn btn-secondary">Loading...</a>
+    <p id='p_game_verr'>Pre-download : </p> 
+    <a id="p_game_urll" class="btn btn-primary">Download</a>
 </div>
 
 <script>
@@ -38,31 +38,21 @@ request.send();
 request.onload = function() {
     var game_ver = request.response.data.game.latest.version;
     var game_url = request.response.data.game.latest.path;
-
     document.getElementById("p_game_ver").innerHTML = "Latest version : " + game_ver;
     document.getElementById("p_game_url").href = game_url;
+    
+    try{
+        var game_verr = request.response.data.pre_download_game.latest.version;
+        var game_urll = request.response.data.pre_download_game.latest.path;
+        document.getElementById("p_game_verr").innerHTML = "Pre-download : " + game_verr;
+        document.getElementById("p_game_urll").href = game_urll;
+    }
+    catch (e) {
+        document.getElementById("p_game_verr").innerHTML = "Pre-download not available";
+    }
+    
 }
 
-</script>
-
-<script>
-$.ajaxSetup({
-    scriptCharset: "utf-8", //or "ISO-8859-1"
-    contentType: "application/json; charset=utf-8"
-});
-
-$.getJSON('https://whatever-origin.herokuapp.com/get?url=' + 
-    encodeURIComponent('https://api-beta-sdk-os-static.mihoyo.com/hk4e_global/mdk/launcher/api/resource?key=WIypZbGH&launcher_id=10') + '&callback=?',
-    function (data) {
-        var game_ver = data.contents.data.game.latest.version;
-        var game_url = data.contents.data.game.latest.path;
-
-        document.getElementById("p_game_ver2").innerHTML = "Latest Known Beta version : " + game_ver;
-        document.getElementById("p_game_url2").href = game_url;
-
-        document.getElementById("p_game_url2").className = "btn btn-primary";
-        document.getElementById("p_game_url2").innerHTML = "Download";
-});
 </script>
 
 </body>
