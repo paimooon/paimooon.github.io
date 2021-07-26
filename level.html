@@ -472,37 +472,37 @@ function SetChar(mtype){
 		
 		res=res+"<p><font size='2'>체력:"+r[0].toFixed(1).toString()+" <strong>|</strong> 공격:"+r[1].toFixed(1).toString()+" <strong>|</strong> 방어:"+r[2].toFixed(1).toString()+"</font></p>"
 		res=res+"<p><font size='2'>원마:"+r[3].toFixed(1).toString()+" <strong>|</strong> 원충:"+r[4].toFixed(1).toString()+" <strong>|</strong> 치확:"+r[5].toFixed(1).toString()+" <strong>|</strong> 치피:"+r[6].toFixed(1).toString()+"</font></p>"
-		if(J.mode!=6 && J.mode!=7){res1=res1+"<p>공 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"}//호두和诺埃尔不显示这一条
+		if(J.mode!=6 && J.mode!=7){res1=res1+"<p>공 치명：<font size='4'>"+(r[5]+r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"}//호두和诺埃尔不显示这一条
 		
 		switch(J.mode){
 			case 0://一般通用
 				break;
 			case 1://火水冰通用
-			res1=res1+"<p>공 원마 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 2://火水冰充能工具人通用
-			res1=res1+"<p>공 원마 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 원마 원충 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 3://一般充能工具人通用
-			res1=res1+"<p>공 원충 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 4://알베도
-			res1=res1+"<p>방 치확치피：<font size='4'>"+(r[5]+r[2]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>방 치명：<font size='4'>"+(r[5]+r[2]+r[6]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 5://종려
-			res1=res1+"<p>공 체 치확치피：<font size='4'>"+(r[5]+r[1]+r[0]+r[6]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 체 원충 치확치피：<font size='4'>"+(r[5]+r[1]+r[0]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원충 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 6://호두
 			res1=res1+"<p>체 원마 爆伤：<font size='4'>"+(r[0]+r[3]+r[6]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>체 원마 치확치피：<font size='4'>"+(r[0]+r[3]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 체 원마 치확치피（攻击0.4折算）：<font size='4'>"+(r[0]+r[3]+r[5]+r[6]+r[1]*0.4).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 원마 치명：<font size='4'>"+(r[0]+r[3]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원마 치명（攻击0.4折算）：<font size='4'>"+(r[0]+r[3]+r[5]+r[6]+r[1]*0.4).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 7://노엘
-			res1=res1+"<p>방 치확치피：<font size='4'>"+(r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 방 치확치피：<font size='4'>"+(r[1]+r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 방 원충 치확치피：<font size='4'>"+(r[1]+r[2]+r[4]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>방 치명：<font size='4'>"+(r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 방 치명：<font size='4'>"+(r[1]+r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 방 원충 치명：<font size='4'>"+(r[1]+r[2]+r[4]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 8://生命值奶妈
 			res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
@@ -511,15 +511,15 @@ function SetChar(mtype){
 			res1=res1+"<p>원마：<font size='4'>"+(r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 10://유라
-			res1=res1+"<p>공 원충 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 击爆伤：<font size='4'>"+(r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 11://벤티
-			res1=res1+"<p>공 체 원마 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 12://카즈하
 			res1=res1+"<p>원마：<font size='4'>"+(r[3]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 원마 치확치피：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			default:
 				break;
