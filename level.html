@@ -72,6 +72,7 @@ padding: 5px;
 <option>모나</option>
 <option>행추</option>
 <option>바바라</option>
+<option>산고노미야 코코미</option>
 </optgroup>
 <optgroup label="불">
 <option>다이루크</option>
@@ -93,6 +94,7 @@ padding: 5px;
 <option>케이아</option>
 <option>로자리아</option>
 <option>카미사토 아야카</option>
+<option>에일로이</option>
 </optgroup>
 <optgroup label="번개">
 <option>각청</option>
@@ -100,6 +102,8 @@ padding: 5px;
 <option>북두</option>
 <option>레이저</option>
 <option>리사</option>
+<option>라이덴 쇼군</option>
+<option>쿠죠 사라</option>
 </optgroup>
 <optgroup label="바위">
 <option>종려</option>
@@ -149,17 +153,17 @@ padding: 5px;
 </p>
 
 <p align="center" class="lt">——무기 기초 공격력——</p>
-<p align="center"><input type="text" id="QQ" value="0" onchange="SetCharS(&#39;QQ&#39;)"></p>
+<p align="center"><input type="text" id="QQ" value="0" onchange="SetCharS('QQ')"></p>
 
 
 <p align="center" class="lt">——성유물 세부사항——</p>
-<p align="center">+HP 최대치：<input type="text" id="T1" value="0" onchange="SetCharS(&#39;T1&#39;)"></p>
-<p align="center">+공격력：<input type="text" id="T2" value="0" onchange="SetCharS(&#39;T2&#39;)"></p>
-<p align="center">+방어력：<input type="text" id="T3" value="0" onchange="SetCharS(&#39;T3&#39;)"></p>
-<p align="center">+원소 마스터리：<input type="text" id="T4" value="0" onchange="SetCharS(&#39;T4&#39;)">	</p>
-<p align="center">+치명타 확률%：<input type="text" id="T5" value="0" onchange="SetCharS(&#39;T5&#39;)">	</p>
-<p align="center">+치명타 피해%：<input type="text" id="T6" value="0" onchange="SetCharS(&#39;T6&#39;)">	</p>
-<p align="center">+원소 충전 효율%：<input type="text" id="T7" value="0" onchange="SetCharS(&#39;T7&#39;)">	</p>
+<p align="center">+HP 최대치：<input type="text" id="T1" value="0" onchange="SetCharS('T1')"></p>
+<p align="center">+공격력：<input type="text" id="T2" value="0" onchange="SetCharS('T2')"></p>
+<p align="center">+방어력：<input type="text" id="T3" value="0" onchange="SetCharS('T3')"></p>
+<p align="center">+원소 마스터리：<input type="text" id="T4" value="0" onchange="SetCharS('T4')">	</p>
+<p align="center">+치명타 확률%：<input type="text" id="T5" value="0" onchange="SetCharS('T5')">	</p>
+<p align="center">+치명타 피해%：<input type="text" id="T6" value="0" onchange="SetCharS('T6')">	</p>
+<p align="center">+원소 충전 효율%：<input type="text" id="T7" value="0" onchange="SetCharS('T7')">	</p>
 
 <p align="center" class="lt">——결과——</p>
 <p id="result" align="center"><p>
@@ -330,6 +334,23 @@ case "요이미야":
 this.lv80a={baseHP:9450,baseDEF:572,baseATK:300,critRate:24.2},this.lv90={baseHP:10164,baseDEF:615,baseATK:323,critRate:24.2}
 this.mode=1
 break;
+case "쿠죠 사라":
+this.lv80a={baseHP:8907,baseDEF:584,baseATK:182},this.lv90={baseHP:9570,baseDEF:628,baseATK:195}
+this.mode=3
+break;
+case "라이덴 쇼군":
+this.lv80a={baseHP:12000,baseDEF:734,baseATK:314},this.lv90={baseHP:12907,baseDEF:789,baseATK:337}
+this.mode=13
+break;
+case "산고노미야 코코미":
+this.lv80a={baseHP:12524,baseDEF:611,baseATK:218},this.lv90={baseHP:13471,baseDEF:657,baseATK:234}
+this.mode=14
+break;
+case "에일로이":
+this.lv80a={baseHP:10133,baseDEF:629,baseATK:217},this.lv90={baseHP:10899,baseDEF:676,baseATK:234}
+this.mode=1
+break;
+
 	default:
 break;
 	}
@@ -515,12 +536,20 @@ function SetChar(mtype){
 			res1=res1+"<p>공 치피：<font size='4'>"+(r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 11://벤티
-			res1=res1+"<p>공 체 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원충 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 12://카즈하
 			res1=res1+"<p>원마：<font size='4'>"+(r[3]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
+            case 13://라이덴 쇼군
+            res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
+                break;
+            case 14://산고노미야 코코미
+            res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
+            res1=res1+"<p>체 공：<font size='4'>"+(r[0]+r[1]).toFixed(1).toString()+"</font>점</p>"
+            res1=res1+"<p>체 공 원마：<font size='4'>"+(r[0]+r[1]+r[3]).toFixed(1).toString()+"</font>점</p>"
+                break;
 			default:
 				break;
 		}
