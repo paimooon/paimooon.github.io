@@ -52,9 +52,11 @@ padding: 5px;
 
 <body>
 <p class="t">성유물 계산기</p>
-<p align="center" class="wb"><a href="https://bbs.nga.cn/read.php?tid=26655137">사용설명서</a></p>
+<p align="center" class="wb"><a href="https://bbs.nga.cn/read.php?tid=26655137">NGA 원문</a></p>
+<p align="center" class="wb"><a href="https://arca.live/b/genshin/30766890">한국어 사용설명서</p>
 <p align="center" class="wb"><a>원저자: NGA-pressure_pressure</a></p>
 <p align="center" class="wb"><a>20~25점: 잘키웠다, 26~30점: 졸업</a></p>
+<p align="center" class="wb"><a>캐릭터 상세 창 -> 성유물 창 -> 성유물 자세히 클릭</a></p>
 <hr class="fgx">
 <p align="center">캐릭터：
 <select id="Char" onchange="SetChar(2)">
@@ -84,6 +86,7 @@ padding: 5px;
 <option>신염</option>
 <option>연비</option>
 <option>요이미야</option>
+<option>토마마</option>
 </optgroup>
 <optgroup label="얼음">
 <option>치치</option>
@@ -349,6 +352,9 @@ break;
 case "에일로이":
 this.lv80a={baseHP:10133,baseDEF:629,baseATK:217},this.lv90={baseHP:10899,baseDEF:676,baseATK:234}
 this.mode=1
+case "토마":
+this.lv80a={baseHP:9616,baseDEF:699,baseATK:188},this.lv90={baseHP:10331,baseDEF:751,baseATK:202}
+this.mode=15
 break;
 
 	default:
@@ -539,7 +545,7 @@ function SetChar(mtype){
 			res1=res1+"<p>공 원충 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
 			case 12://카즈하
-			res1=res1+"<p>원마：<font size='4'>"+(r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>원마 원충：<font size='4'>"+(r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
 				break;
             case 13://라이덴 쇼군
@@ -547,9 +553,12 @@ function SetChar(mtype){
                 break;
             case 14://산고노미야 코코미
             res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
-            res1=res1+"<p>체 공：<font size='4'>"+(r[0]+r[1]).toFixed(1).toString()+"</font>점</p>"
-            res1=res1+"<p>체 공 원마：<font size='4'>"+(r[0]+r[1]+r[3]).toFixed(1).toString()+"</font>점</p>"
+            res1=res1+"<p>체 공 원충：<font size='4'>"+(r[0]+r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
+            res1=res1+"<p>체 공 원마 원충：<font size='4'>"+(r[0]+r[1]+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
                 break;
+			case 15://토마
+			res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
+				break;	
 			default:
 				break;
 		}
