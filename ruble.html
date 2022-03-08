@@ -42,8 +42,9 @@ request.onload = function() {
     nh_request.onload = function() {
         var r = nh_request.response[0].ttSellingPrice;
         var price = parseInt( r * document.getElementById("p_ruble").innerHTML);
+        var rate = parseInt((119000-price)/119000*100);
         
-        document.getElementById("p_ruble").innerHTML = "<br>Ruble Truck Price: " + document.getElementById("p_ruble").innerHTML + " RUB<br><br>= " + price + " KRW";
+        document.getElementById("p_ruble").innerHTML = "<br>Ruble Truck Price: " + document.getElementById("p_ruble").innerHTML + " RUB<br><br>= " + price + " KRW (" + rate + "% off)";
     }
 }
 </script>
