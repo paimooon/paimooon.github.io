@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Paimooon</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Ruble Truck Price</h1>
+    <p id='p_ruble'></p>
+</div>
+
+<script>
+
+var request = new XMLHttpRequest();
+var url = "https://hk4e-sdk-os.mihoyo.com/hk4e_global/mdk/shopwindow/shopwindow/listPriceTier?currency=RUB";
+var kebhana = "http://fx.kebhana.com/FER1101M.web";
+var dunamu = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWRUB";
+
+request.open("GET", url);
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+    request.response.data.tiers.forEach(element => {
+        if(element.tier_id=="Tier_60") {
+            document.getElementById("p_ruble").innerHTML = element.t_price[0].price;
+        }
+    });
+}
+</script>
+
+</body>
+</html>
