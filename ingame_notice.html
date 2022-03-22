@@ -16,7 +16,7 @@
 
       <script>
         var request = new XMLHttpRequest();
-        var url = "https://api-os-takumi-static.mihoyo.com/common/hk4e_global/announcement/api/getAnnContent?game=hk4e&game_biz=hk4e_global&lang=ko&bundle_id=hk4e_global&platform=pc&region=os_asia&level=60";
+        var url = `https://hk4e-api-os-static.mihoyo.com/common/hk4e_global/announcement/api/getAnnContent?game=hk4e&game_biz=hk4e_global&lang=ko&bundle_id=hk4e_global&platform=pc&region=os_asia&t=${Date.now() / 1000 | 0}&level=60&channel_id=1`;
         
         var divcontent = `
                 <div class="accordion-item">
