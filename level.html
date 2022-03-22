@@ -98,6 +98,7 @@ padding: 5px;
 <option>로자리아</option>
 <option>카미사토 아야카</option>
 <option>에일로이</option>
+<option>신학</option>
 </optgroup>
 <optgroup label="번개">
 <option>각청</option>
@@ -107,6 +108,7 @@ padding: 5px;
 <option>리사</option>
 <option>라이덴 쇼군</option>
 <option>쿠죠 사라</option>
+<option>야에 미코</option>
 </optgroup>
 <optgroup label="바위">
 <option>종려</option>
@@ -116,6 +118,7 @@ padding: 5px;
 <option>노엘</option>
 <option>아라타키 이토</option>
 <option>고로</option>
+<option>운근</option>
 </optgroup>
 </select>
 </p>
@@ -365,7 +368,19 @@ this.mode=7
 break;
 case "고로":
 this.lv80a={baseHP:8907,baseDEF:603,baseATK:170},this.lv90={baseHP:9570,baseDEF:648,baseATK:183}
-this.mode=7
+this.mode=16
+break;
+case "신학":
+this.lv80a={baseHP:12080,baseDEF:772,baseATK:282},this.lv90={baseHP:12993,baseDEF:830,baseATK:304}
+this.mode=17
+break;
+case "운근":
+this.lv80a={baseHP:9919,baseDEF:684,baseATK:178},this.lv90={baseHP:10657,baseDEF:734,baseATK:191}
+this.mode=16
+break;
+case "야에 미코":
+this.lv80a={baseHP:9643,baseDEF:529,baseATK:316},this.lv90={baseHP:10372,baseDEF:569,baseATK:340}
+this.mode=18
 break;
 	default:
 break;
@@ -569,6 +584,16 @@ function SetChar(mtype){
 			case 15://토마
 			res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
 				break;	
+            case 16://고로, 운근
+			res1=res1+"<p>방 원충：<font size='4'>"+(r[2]+r[4]).toFixed(1).toString()+"</font>점</p>"
+                break;
+            case 17://신학
+			res1=res1+"<p>공 원충：<font size='4'>"+(r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			    break;	
+			case 18://야에 미코
+			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[3]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[5]+r[1]+r[3]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			    break;
 			default:
 				break;
 		}
