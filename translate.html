@@ -65,7 +65,17 @@
 </head>
 <body>
     <div class="container">
+        <label><i>Current version: output_4762225_de745b65ed</i></label>
+
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
+        
+        <form>
+            <input type="radio" name="searchtype" value="kr" checked><label for="kr">kr</label>
+            <input type="radio" name="searchtype" value="en"><label for="en">en</label>
+            <input type="radio" name="searchtype" value="cn"><label for="cn">cn</label>
+            <input type="radio" name="searchtype" value="key"><label for="key">key</label>
+        </form>
+
         <div id="output"></div>
         <table width="100%" id="searchTable">
 
@@ -110,7 +120,7 @@
                 sentenceId.setAttribute('rowSpan', '3')
 
                 var sentenceKrDesc = document.createElement("td");
-                sentenceKrDesc.innerHTML = sentences[1].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceKrDesc.innerHTML = textmap.kr[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceCnDesc = document.createElement("td");
                 sentenceCnDesc.innerHTML = textmap.cn[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceEnDesc = document.createElement("td");
@@ -131,7 +141,13 @@
         function handleKeyDown(event) {
             if (event.key === 'Enter') {
                 const inputText = event.target.value;
-                outputArray = Object.entries(textmap.kr).filter(item => item[1] !== null ? item[1].replace(/\u00a0/g, " ").includes(event.target.value) : false);
+                if (langs.includes(document.querySelector('input[name="searchtype"]:checked').value)){
+                    outputArray = Object.entries(textmap[document.querySelector('input[name="searchtype"]:checked').value]).filter(item => item[1] !== null ? item[1].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
+                }
+                else {
+                    outputArray = Object.entries(textmap.kr).filter(item => item[0] !== null ? item[0].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
+                }
+                
                 processInput(inputText, outputArray);
             }
         }
