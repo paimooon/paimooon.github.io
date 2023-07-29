@@ -3,29 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Load Static JSON as Object</title>
-</head>
-<body>
-    <h1>Static JSON Data</h1>
-    <pre id="json-output"></pre>
-
-    <script>
-        // Function to fetch JSON data and process it
-        function loadJSON() {
-            fetch('./1.2/MergeTextmap_en.json')
-                .then(response => response.json())
-                .then(data => {
-                    // Process the JSON object here
-                    displayData(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching JSON:', error);
-                });
+    <title>Textmap searcher for centain anime game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
         }
 
-        // Function to display JSON data on the page
-        function displayData(data) {
-            console.log(data)
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            border: 2px solid #ccc;
+        }
+
+        th, td {
+            border: 2px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: grid;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+            box-shadow: none;
+            padding: 1rem;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
+        <div id="output"></div>
+        <table width="100%" id="searchTable">
+
+        </table>
+    </div>
+
+    <script>
+        const langs = ["en", "cn", "kr"];
+        var textmap = {};
+
+        function saveData(data, lang) {
+            textmap[lang] = data;
+        }
+
+        function loadJSON() {
+            langs.forEach(lang => {
+                fetch(`./1.2/MergeTextmap_${lang}.json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process the JSON object here
+                        saveData(data, lang);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching JSON:', error);
+                    });
+            });
+        }
+        
+        function processInput(inputText, outputArray) {
+            const outputDiv = document.getElementById('output');
+            const searchTable = document.getElementById('searchTable');
+            outputDiv.textContent = `Searched result: ${outputArray.length}`;
+
+            searchTable.innerHTML = '';
+            outputArray.forEach(sentences => {
+                var rowKr = document.createElement("tr");
+                var rowCn = document.createElement("tr");
+                var rowEn = document.createElement("tr");
+
+                var sentenceId = document.createElement("td");
+                sentenceId.innerHTML = sentences[0];
+                sentenceId.setAttribute('rowSpan', '3')
+
+                var sentenceKrDesc = document.createElement("td");
+                sentenceKrDesc.innerHTML = sentences[1].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                var sentenceCnDesc = document.createElement("td");
+                sentenceCnDesc.innerHTML = textmap.cn[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                var sentenceEnDesc = document.createElement("td");
+                sentenceEnDesc.innerHTML = textmap.en[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+
+                rowKr.appendChild(sentenceId);
+
+                rowKr.appendChild(sentenceKrDesc);
+                searchTable.appendChild(rowKr);
+                rowCn.appendChild(sentenceCnDesc);
+                searchTable.appendChild(rowCn);
+                rowEn.appendChild(sentenceEnDesc);
+                searchTable.appendChild(rowEn);
+
+            })
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                const inputText = event.target.value;
+                outputArray = Object.entries(textmap.kr).filter(item => item[1] !== null ? item[1].replace(/\u00a0/g, " ").includes(event.target.value) : false);
+                processInput(inputText, outputArray);
+            }
         }
 
         // Load JSON when the page is ready
