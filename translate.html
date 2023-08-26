@@ -73,6 +73,7 @@
             <input type="radio" name="searchtype" value="kr" checked><label for="kr">kr</label>
             <input type="radio" name="searchtype" value="en"><label for="en">en</label>
             <input type="radio" name="searchtype" value="cn"><label for="cn">cn</label>
+            <input type="radio" name="searchtype" value="jp"><label for="jp">jp</label>
             <input type="radio" name="searchtype" value="key"><label for="key">key</label>
         </form>
 
@@ -83,7 +84,7 @@
     </div>
 
     <script>
-        const langs = ["en", "cn", "kr"];
+        const langs = ["en", "cn", "kr", "jp"];
         var textmap = {};
 
         function saveData(data, lang) {
@@ -114,10 +115,11 @@
                 var rowKr = document.createElement("tr");
                 var rowCn = document.createElement("tr");
                 var rowEn = document.createElement("tr");
+                var rowJp = document.createElement("tr");
 
                 var sentenceId = document.createElement("td");
                 sentenceId.innerHTML = sentences[0];
-                sentenceId.setAttribute('rowSpan', '3')
+                sentenceId.setAttribute('rowSpan', '4')
 
                 var sentenceKrDesc = document.createElement("td");
                 sentenceKrDesc.innerHTML = textmap.kr[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
@@ -125,6 +127,8 @@
                 sentenceCnDesc.innerHTML = textmap.cn[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceEnDesc = document.createElement("td");
                 sentenceEnDesc.innerHTML = textmap.en[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                var sentenceJpDesc = document.createElement("td");
+                sentenceJpDesc.innerHTML = textmap.jp[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
 
                 rowKr.appendChild(sentenceId);
 
@@ -134,6 +138,8 @@
                 searchTable.appendChild(rowCn);
                 rowEn.appendChild(sentenceEnDesc);
                 searchTable.appendChild(rowEn);
+                rowJp.appendChild(sentenceJpDesc);
+                searchTable.appendChild(rowJp);
 
             })
         }
