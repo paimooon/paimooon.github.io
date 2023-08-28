@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: output_5302853_5283edd0bc</i></label>
+        <label><i>Current version: output_5261124_2f91c2ae43</i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -93,7 +93,7 @@
 
         function loadJSON() {
             langs.forEach(lang => {
-                fetch(`./1.2/MergeTextmap_${lang}.json`)
+                fetch(`./1.3/MergeTextmap_${lang}.json`)
                     .then(response => response.json())
                     .then(data => {
                         // Process the JSON object here
