@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: output_5766530_c50f240bb5 (2023-10-25)</i></label>
+        <label><i>Current version: output_5917433_edf5fbe263 (2023-11-16)</i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -74,7 +74,6 @@
             <input type="radio" name="searchtype" value="en"><label for="en">en</label>
             <input type="radio" name="searchtype" value="cn"><label for="cn">cn</label>
             <input type="radio" name="searchtype" value="jp"><label for="jp">jp</label>
-            <input type="radio" name="searchtype" value="key"><label for="key">key</label>
         </form>
 
         <div id="output"></div>
@@ -93,7 +92,7 @@
 
         function loadJSON() {
             langs.forEach(lang => {
-                fetch(`./1.4/MergeTextmap_${lang}.json`)
+                fetch(`./1.5/HashTextmap_${lang}.json`)
                     .then(response => response.json())
                     .then(data => {
                         // Process the JSON object here
