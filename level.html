@@ -39,11 +39,123 @@
             font-weight: 800;
         }
 
-input[type="text"]{
-border-radius:4px;
-border:solid 1px #AAAAAA;
-font-family:"NanumBarunGothic";
-padding: 5px;
+        table.gridtable {
+            font-family: verdana,arial,sans-serif;
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+        table.gridtable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+        table.gridtable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+		.td-3{width:250px;} 
+		
+		.tip{
+			margin-left:60px;
+			margin-right:60px;
+		}
+		input[type="text"]{
+			border-radius:4px;
+			border:solid 1px #AAAAAA;
+			font-family:"黑体";
+			padding: 5px;
+		}
+		button {
+    color: #444444;
+    background: #F3F3F3;
+    border: 1px #DADADA solid;
+    padding: 5px 10px;
+    border-radius: 2px;
+    
+    font-size: 10pt;
+    outline: none;
+}
+
+button:hover {
+    border: 1px #C6C6C6 solid;
+    box-shadow: 1px 1px 1px #EAEAEA;
+    color: #333333;
+    background: #F7F7F7;
+}
+
+button:active {
+    box-shadow: inset 1px 1px 1px #DFDFDF;   
+}
+
+/* Blue button as seen on translate.google.com*/
+button.blue {
+    color: white;
+    background: #4C8FFB;
+    border: 1px #3079ED solid;
+    box-shadow: inset 0 1px 0 #80B0FB;
+}
+
+button.blue:hover {
+    border: 1px #2F5BB7 solid;
+    box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #5A94F1;
+    background: #3F83F1;
+}
+
+button.blue:active {
+    box-shadow: inset 0 2px 5px #2370FE;   
+}
+
+/* Orange button as seen on blogger.com*/
+button.orange {
+    color: white;
+    border: 1px solid #FB8F3D; 
+    background: -webkit-linear-gradient(top, #FDA251, #FB8F3D);
+    background: -moz-linear-gradient(top, #FDA251, #FB8F3D);
+    background: -ms-linear-gradient(top, #FDA251, #FB8F3D);
+}
+
+button.orange:hover {
+    border: 1px solid #EB5200;
+    background: -webkit-linear-gradient(top, #FD924C, #F9760B); 
+    background: -moz-linear-gradient(top, #FD924C, #F9760B); 
+    background: -ms-linear-gradient(top, #FD924C, #F9760B); 
+    box-shadow: 0 1px #EFEFEF;
+}
+
+button.orange:active {
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+}
+
+/* Red Google Button as seen on drive.google.com */
+button.red {
+    background: -webkit-linear-gradient(top, #DD4B39, #D14836); 
+    background: -moz-linear-gradient(top, #DD4B39, #D14836); 
+    background: -ms-linear-gradient(top, #DD4B39, #D14836); 
+    border: 1px solid #DD4B39;
+    color: white;
+    text-shadow: 0 1px 0 #C04131;
+}
+
+button.red:hover {
+     background: -webkit-linear-gradient(top, #DD4B39, #C53727);
+     background: -moz-linear-gradient(top, #DD4B39, #C53727);
+     background: -ms-linear-gradient(top, #DD4B39, #C53727);
+     border: 1px solid #AF301F;
+}
+
+button.red:active {
+     box-shadow: inset 0 1px 1px rgba(0,0,0,0.2);
+    background: -webkit-linear-gradient(top, #D74736, #AD2719);
+    background: -moz-linear-gradient(top, #D74736, #AD2719);
+    background: -ms-linear-gradient(top, #D74736, #AD2719);
 }
 
 
@@ -51,15 +163,15 @@ padding: 5px;
 <link type="text/css" rel="stylesheet" charset="UTF-8" href="./level_files/translateelement.css"></head>
 
 <body>
-<p class="t">성유물 계산기</p>
+<p class="t">성유물 계산기 4.1 업데이트</p>
 <p align="center" class="wb"><a href="https://bbs.nga.cn/read.php?tid=26655137">NGA 원문</a></p>
-<p align="center" class="wb"><a href="https://arca.live/b/genshin/30766890">한국어 사용설명서</p>
+<p align="center" class="wb"><a href="https://arca.live/b/genshinacademia?target=all&keyword=%EC%84%B1%EC%9C%A0%EB%AC%BC+%EA%B3%84%EC%82%B0%EA%B8%B0+%EC%82%AC%EC%9A%A9%EC%84%A4%EB%AA%85%EC%84%9C">한국어 사용설명서</p>
 <p align="center" class="wb"><a>원저자: NGA-pressure_pressure</a></p>
 <p align="center" class="wb"><a>20~25점: 잘키웠다, 26~30점: 졸업</a></p>
 <p align="center" class="wb"><a>캐릭터 상세 창 -> 성유물 창 -> 성유물 자세히 클릭</a></p>
 <hr class="fgx">
 <p align="center">캐릭터：
-<select id="Char" onchange="SetChar(2)">
+<select id="Char" onchange="SetCharL()">
 <optgroup label="바람">
 <option>벤티</option>
 <option>진</option>
@@ -68,6 +180,10 @@ padding: 5px;
 <option>설탕</option>
 <option>카에데하라 카즈하</option>
 <option>사유</option>
+<option>시카노인 헤이조</option>
+<option>방랑자</option>
+<option>파루잔</option>
+<option>리넷</option>
 </optgroup>
 <optgroup label="물">
 <option>타르탈리아</option>
@@ -75,6 +191,11 @@ padding: 5px;
 <option>행추</option>
 <option>바바라</option>
 <option>산고노미야 코코미</option>
+<option>카미사토 아야토</option>
+<option>야란</option>
+<option>캔디스</option>
+<option>닐루</option>
+<option>느비예트</option>
 </optgroup>
 <optgroup label="불">
 <option>다이루크</option>
@@ -87,6 +208,8 @@ padding: 5px;
 <option>연비</option>
 <option>요이미야</option>
 <option>토마</option>
+<option>데히야</option>
+<option>리니</option>
 </optgroup>
 <optgroup label="얼음">
 <option>치치</option>
@@ -99,6 +222,10 @@ padding: 5px;
 <option>카미사토 아야카</option>
 <option>에일로이</option>
 <option>신학</option>
+<option>레일라</option>
+<option>미카</option>
+<option>프레미네</option>
+<option>라이오슬리</option>
 </optgroup>
 <optgroup label="번개">
 <option>각청</option>
@@ -109,6 +236,9 @@ padding: 5px;
 <option>라이덴 쇼군</option>
 <option>쿠죠 사라</option>
 <option>야에 미코</option>
+<option>쿠키 시노부</option>
+<option>도리</option>
+<option>사이노</option>
 </optgroup>
 <optgroup label="바위">
 <option>종려</option>
@@ -119,6 +249,17 @@ padding: 5px;
 <option>아라타키 이토</option>
 <option>고로</option>
 <option>운근</option>
+</optgroup>
+<optgroup label="풀">
+<option>타이나리</option>
+<option>콜레이</option>
+<option>풀행자</option>
+<option>나히다</option>
+<option>알하이탐</option>
+<option>요요</option>
+<option>백출</option>
+<option>카베</option>
+<option>키라라</option>
 </optgroup>
 </select>
 </p>
@@ -162,230 +303,445 @@ padding: 5px;
 
 <p align="center" class="lt">——무기 기초 공격력——</p>
 <p align="center"><input type="number" id="QQ" value="0" onchange="SetCharS('QQ')"></p>
-
+<p align="center" id="WeaponList">
+<select id="Weapon" onchange="SetWeapon()">
+<option value="0">무기 선택</option>
+<option value="674">천공의 날개</option>
+<option value="608">아모스/극지/비뢰/종탄노</option>
+<option value="565">제례/사냥꾼/흑암</option>
+<option value="510">녹활/유야/바람꽃/절현/청록/왕실/담월</option>
+<option value="454">페보/강철궁/파마궁</option>
+</select>
+</p>
 
 <p align="center" class="lt">——성유물 세부사항——</p>
-<p align="center">+HP 최대치：<input type="number" id="T1" value="0" onchange="SetCharS('T1')"></p>
-<p align="center">+공격력：<input type="number" id="T2" value="0" onchange="SetCharS('T2')"></p>
-<p align="center">+방어력：<input type="number" id="T3" value="0" onchange="SetCharS('T3')"></p>
-<p align="center">+원소 마스터리：<input type="number" id="T4" value="0" onchange="SetCharS('T4')">	</p>
-<p align="center">+치명타 확률%：<input type="number" float="any" id="T5" value="0" onchange="SetCharS('T5')">	</p>
-<p align="center">+치명타 피해%：<input type="number" float="any" id="T6" value="0" onchange="SetCharS('T6')">	</p>
-<p align="center">+원소 충전 효율%：<input type="number" float="any" id="T7" value="0" onchange="SetCharS('T7')">	</p>
+<p align="center">+HP 최대치：<input type="text" id="T1" value="0" onchange="SetCharS('T1')"></p>
+<p align="center">+공격력：<input type="text" id="T2" value="0" onchange="SetCharS('T2')"></p>
+<p align="center">+방어력：<input type="text" id="T3" value="0" onchange="SetCharS('T3')"></p>
+<p align="center">+원소 마스터리：<input type="text" id="T4" value="0" onchange="SetCharS('T4')">	</p>
+<p align="center">+치명타 확률%：<input type="text" id="T5" value="0" onchange="SetCharS('T5')">	</p>
+<p align="center">+치명타 피해%：<input type="text" id="T6" value="0" onchange="SetCharS('T6')">	</p>
+<p align="center">+원소 충전 효율%：<input type="text" id="T7" value="0" onchange="SetCharS('T7')">	</p>
 
 <p align="center" class="lt">——결과——</p>
-<p id="result" align="center"><p>
-<p align="center"><button type="button" onclick="SetChar(1)">새로고침</button></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<p id="result2" align="center"></p>
+<p id="result" align="center">세부사항을 입력해주세요</p>
 <p>&nbsp;</p>
 
+<p align="center" id="setlabel">프리셋：
+<select id="Sets" onchange="SetChar(2)">
+<option >1</option>
+</select>
+<button type="button" onclick="addset()">결과 저장하기</button>
+</p>
+</div>
+<div id="buttonlabel" align="center"><button type="button" onclick="remove()" class="red">결과 초기화</button></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
 <script>
+var r=[0,0,0,0,0,0,0];
+var cc=[0,0,0,0,0,0,0];
+var ShowLoad=""
+var setsum=1
+var onloading=true
+var charcache
+var lastcheck=-1;
+var lastcheckstr="";
 
 function userobject(name){ 
 switch(name){
 case "벤티":
 this.lv80a={baseHP:9791.154310719692,baseDEF:621.6392653943294,baseATK:244.60097321190642,energyRecharge:31.999999284744263},this.lv90={baseHP:10531.48386939941,baseDEF:668.6423311858234,baseATK:263.09622679515087,energyRecharge:31.999999284744263}
 this.mode=11
+this.Etype=1
 break;
 case "진":
 this.lv80a={baseHP:13662.07554812677,baseDEF:714.5278892422866,baseATK:222.3645244843292,healing:22.14999943971634},this.lv90={baseHP:14695.093513910891,baseDEF:768.55440212143,baseATK:239.17839184791592,healing:22.14999943971634}
 this.mode=3
+this.Etype=1
 break;
 case "소":
 this.lv80a={baseHP:11840.465424213122,baseDEF:743.1090066680572,baseATK:324.65219912465363,critRate:24.200000166893005},this.lv90={baseHP:12735.747672248981,baseDEF:799.2965799245794,baseATK:349.2004441320678,critRate:24.200000166893005}
 this.mode=0
+this.Etype=1
 break;
 case "바람행자":
 this.lv80a={baseHP:10121.775421069935,baseDEF:635.2536499864582,baseATK:197.68778471910082,percentATK:23.999999463558197},this.lv90={baseHP:10874.91499475576,baseDEF:682.5215109506607,baseATK:212.39719698963927,percentATK:23.999999463558197}
 this.mode=11
+this.Etype=1
 break;
 case "설탕":
 this.lv80a={baseHP:8603.508985277615,baseDEF:654.3112699264966,baseATK:158.1502227076462,anemoDamage:23.999999463558197},this.lv90={baseHP:9243.677602744545,baseDEF:702.9971676649075,baseATK:169.91775205143585,anemoDamage:23.999999463558197}
 this.mode=9
+this.Etype=1
 break;
 case "타르탈리아":
 this.lv80a={baseHP:12182.017518934357,baseDEF:757.3995351761696,baseATK:280.1793016694992,hydroDamage:28.79999876022339},this.lv90={baseHP:13103.125224382035,baseDEF:814.6676368990447,baseATK:301.3647742375979,hydroDamage:28.79999876022339}
 this.mode=1
+this.Etype=2
 break;
 case "모나":
 this.lv80a={baseHP:9677.303449718864,baseDEF:607.3486917354603,baseATK:266.83742193948365,energyRecharge:31.999999284744263},this.lv90={baseHP:10409.024522594642,baseDEF:653.2712256159284,baseATK:287.0140617423858,energyRecharge:31.999999284744263}
 this.mode=2
+this.Etype=2
 break;
 case "행추":
 this.lv80a={baseHP:9514.46903624275,baseDEF:705.1315610686324,baseATK:187.8033969635344,percentATK:23.999999463558197},this.lv90={baseHP:10222.420237524027,baseDEF:757.5988870539913,baseATK:201.77733869931944,percentATK:23.999999463558197}
 this.mode=2
+this.Etype=2
 break;
 case "바바라":
 this.lv80a={baseHP:9109.597725532774,baseDEF:622.5485987243992,baseATK:148.26583495207979,percentHP:23.999999463558197},this.lv90={baseHP:9787.423311600985,baseDEF:668.8711049900703,baseATK:159.29789376111603,percentHP:23.999999463558197}
 this.mode=8
+this.Etype=2
 break;
 case "다이루크":
 this.lv80a={baseHP:12068.166902074154,baseDEF:728.8184330091881,baseATK:311.3103343406219,critRate:24.200000166893005},this.lv90={baseHP:12980.666121717892,baseDEF:783.9254743546844,baseATK:334.84974830517604,critRate:24.200000166893005}
 this.mode=1
+this.Etype=3
 break;
 case "클레":
 this.lv80a={baseHP:9563.45283285866,baseDEF:571.6222874802552,baseATK:289.0738706670609,pyroDamage:28.79999876022339},this.lv90={baseHP:10286.565419930499,baseDEF:614.8434950278315,baseATK:310.93189668962077,pyroDamage:28.79999876022339}
 this.mode=1
+this.Etype=3
 break;
 case "호두":
 this.lv80a={baseHP:14459.029866148194,baseDEF:814.5617700277107,baseATK:98.95221210261116,critDamage:88.40000033378601},this.lv90={baseHP:15552.307232559891,baseDEF:876.1519925053435,baseATK:106.43438284689182,critDamage:88.40000033378601}
 this.mode=6
+this.Etype=3
 break;
 case "베넷":
 this.lv80a={baseHP:11538.82421229023,baseDEF:717.8366544678356,baseATK:177.9190053932707,energyRecharge:26.669999957084656},this.lv90={baseHP:12397.403338391683,baseDEF:771.2493414536075,baseATK:191.15747659430235,energyRecharge:26.669999957084656}
 this.mode=2
+this.Etype=3
 break;
 case "향릉":
 this.lv80a={baseHP:10121.775421069935,baseDEF:622.5485987243992,baseATK:209.54904563010496,elementalMastery:96},this.lv90={baseHP:10874.91499475576,baseDEF:668.8711049900703,baseATK:225.14102222725342,elementalMastery:96}
 this.mode=2
+this.Etype=3
 break;
 case "엠버":
 this.lv80a={baseHP:8805.94451856229,baseDEF:559.0232276222378,baseATK:207.5721762893645,percentATK:23.999999463558197},this.lv90={baseHP:9461.175943635753,baseDEF:600.6189477914886,baseATK:223.01705909465636,percentATK:23.999999463558197}
 this.mode=1
+this.Etype=3
 break;
 case "신염":
 this.lv80a={baseHP:10425.428383899794,baseDEF:743.2467569919536,baseATK:231.29469811137278,percentATK:23.999999463558197},this.lv90={baseHP:11201.162118580367,baseDEF:798.5501533747884,baseATK:248.50470956988465,percentATK:23.999999463558197}
-this.mode=0
+this.mode=23
+this.Etype=3
 break;
 case "연비":
 this.lv80a={baseHP:8704.726873990265,baseDEF:546.3181629210012,baseATK:223.38718351124407,pyroDamage:23.999999463558197},this.lv90={baseHP:9352.426895260462,baseDEF:586.9685252407799,baseATK:240.00881822685915,pyroDamage:23.999999463558197}
 this.mode=1
+this.Etype=3
 break;
 case "치치":
 this.lv80a={baseHP:11498.913573632512,baseDEF:857.4334312203828,baseATK:266.83742193948365,healing:22.14999943971634},this.lv90={baseHP:12368.370364256552,baseDEF:922.2652425417473,baseATK:287.0140617423858,healing:22.14999943971634}
 this.mode=0
+this.Etype=4
 break;
 case "감우":
 this.lv80a={baseHP:9108.050365417846,baseDEF:585.9128611391243,baseATK:311.3103343406219,critDamage:88.40000033378601},this.lv90={baseHP:9796.729009273928,baseDEF:630.2146005977265,baseATK:334.84974830517604,critDamage:88.40000033378601}
 this.mode=1
+this.Etype=4
 break;
 case "유라":
 this.lv80a={baseHP:12295.867657523078,baseDEF:698.0937476574509,baseATK:317.9812667326378,critDamage:88.40000033378601},this.lv90={baseHP:13225.583793659927,baseDEF:750.8776498723164,baseATK:342.0250962186219,critDamage:88.40000033378601}
 this.mode=10
+this.Etype=4
 break;
 case "중운":
 this.lv80a={baseHP:10222.993309782585,baseDEF:603.4909787843608,baseATK:207.5721762893645,percentATK:23.999999463558197},this.lv90={baseHP:10983.664287271677,baseDEF:648.3954482758236,baseATK:223.01705909465636,percentATK:23.999999463558197}
 this.mode=1
+this.Etype=4
 break;
 case "디오나":
 this.lv80a={baseHP:8907.16240727494,baseDEF:559.0232276222378,baseATK:197.68778471910082,cryoDamage:23.999999463558197},this.lv90={baseHP:9569.92523615167,baseDEF:600.6189477914886,baseATK:212.39719698963927,cryoDamage:23.999999463558197}
 this.mode=8
+this.Etype=4
 break;
 case "케이아":
 this.lv80a={baseHP:10830.29969460977,baseDEF:736.8942170119408,baseATK:207.5721762893645,energyRecharge:26.669999957084656},this.lv90={baseHP:11636.159044503409,baseDEF:791.7249344700394,baseATK:223.01705909465636,energyRecharge:26.669999957084656}
 this.mode=1
+this.Etype=4
 break;
 case "로자리아":
 this.lv80a={baseHP:11437.60632357758,baseDEF:660.6638099065094,baseATK:223.38718351124407,percentATK:23.999999463558197},this.lv90={baseHP:12288.654045875766,baseDEF:709.8223865696564,baseATK:240.00881822685915,percentATK:23.999999463558197}
 this.mode=1
+this.Etype=4
 break;
 case "각청":
 this.lv80a={baseHP:12182.017518934357,baseDEF:743.1090066680572,baseATK:300.1920912161522,critDamage:88.40000033378601},this.lv90={baseHP:13103.125224382035,baseDEF:799.2965799245794,baseATK:322.890810348541,critDamage:88.40000033378601}
 this.mode=0
+this.Etype=5
 break;
 case "피슬":
 this.lv80a={baseHP:8552.899918850977,baseDEF:552.670702901014,baseATK:227.34095180049735,percentATK:23.999999463558197},this.lv90={baseHP:9189.302834416274,baseDEF:593.7937441455288,baseATK:244.256775675296,percentATK:23.999999463558197}
 this.mode=3
+this.Etype=5
 break;
 case "북두":
 this.lv80a={baseHP:12146.13013794995,baseDEF:603.4909787843608,baseATK:209.54904563010496,electroDamage:23.999999463558197},this.lv90={baseHP:13049.897586040897,baseDEF:648.3954482758236,baseATK:225.14102222725342,electroDamage:23.999999463558197}
 this.mode=0
+this.Etype=5
 break;
 case "레이저":
 this.lv80a={baseHP:11133.952901580255,baseDEF:698.7790210886196,baseATK:217.45656023023366,physicalDamage:30.000001192092896},this.lv90={baseHP:11962.406412468641,baseDEF:750.7736681492424,baseATK:233.63691357027892,physicalDamage:30.000001192092896}
 this.mode=0
+this.Etype=5
 break;
 case "리사":
 this.lv80a={baseHP:8907.16240727494,baseDEF:533.6130829609756,baseATK:215.47968326009868,elementalMastery:96},this.lv90={baseHP:9569.92523615167,baseDEF:573.318087431282,baseATK:231.51294280828733,elementalMastery:96}
 this.mode=0
+this.Etype=5
 break;
 case "종려":
 this.lv80a={baseHP:13662.07554812677,baseDEF:685.9467419245484,baseATK:233.482737404026,geoDamage:28.79999876022339},this.lv90={baseHP:14695.093513910891,baseDEF:737.81219098164,baseATK:251.1372978774416,geoDamage:28.79999876022339}
 this.mode=5
+this.Etype=6
 break;
 case "알베도":
 this.lv80a={baseHP:12295.867657523078,baseDEF:814.5617700277107,baseATK:233.48275266281507,geoDamage:28.79999876022339},this.lv90={baseHP:13225.583793659927,baseDEF:876.1519925053435,baseATK:251.13731313623066,geoDamage:28.79999876022339}
 this.mode=4
+this.Etype=6
 break;
 case "바위행자":
 this.lv80a={baseHP:10121.775421069935,baseDEF:635.2536499864582,baseATK:197.68778471910082,percentATK:23.999999463558197},this.lv90={baseHP:10874.91499475576,baseDEF:682.5215109506607,baseATK:212.39719698963927,percentATK:23.999999463558197}
 this.mode=3
+this.Etype=6
 break;
 case "응광":
 this.lv80a={baseHP:9109.597725532774,baseDEF:533.6130829609756,baseATK:197.68778471910082,geoDamage:23.999999463558197},this.lv90={baseHP:9787.423311600985,baseDEF:573.318087431282,baseATK:212.39719698963927,geoDamage:23.999999463558197}
 this.mode=0
+this.Etype=6
 break;
 case "노엘":
 this.lv80a={baseHP:11235.17054615228,baseDEF:743.2467569919536,baseATK:177.9190053932707,percentDEF:30.000001192092896},this.lv90={baseHP:12071.155460843933,baseDEF:798.5501533747884,baseATK:191.15747659430235,percentDEF:30.000001192092896}
 this.mode=7
+this.Etype=6
 break;
 case "카에데하라 카즈하":
 this.lv80a={baseHP:12410,baseDEF:750,baseATK:276,elementalMastery:115.2},this.lv90={baseHP:13348,baseDEF:807,baseATK:297,elementalMastery:115.2}
 this.mode=12
+this.Etype=1
 break;
 case "카미사토 아야카":
 this.lv80a={baseHP:11954,baseDEF:729,baseATK:318,critDamage:88.4},this.lv90={baseHP:12858,baseDEF:784,baseATK:342,critDamage:88.4}
-this.mode=1
+this.mode=10
+this.Etype=4
 break;
 case "사유":
 this.lv80a={baseHP:11033,baseDEF:693,baseATK:227,elementalMastery:96},this.lv90={baseHP:11854,baseDEF:745,baseATK:244,elementalMastery:96}
 this.mode=3
+this.Etype=1
 break;
 case "요이미야":
 this.lv80a={baseHP:9450,baseDEF:572,baseATK:300,critRate:24.2},this.lv90={baseHP:10164,baseDEF:615,baseATK:323,critRate:24.2}
 this.mode=1
+this.Etype=3
 break;
 case "쿠죠 사라":
 this.lv80a={baseHP:8907,baseDEF:584,baseATK:182},this.lv90={baseHP:9570,baseDEF:628,baseATK:195}
 this.mode=3
+this.Etype=5
 break;
 case "라이덴 쇼군":
 this.lv80a={baseHP:12000,baseDEF:734,baseATK:314},this.lv90={baseHP:12907,baseDEF:789,baseATK:337}
 this.mode=13
+this.Etype=5
 break;
 case "산고노미야 코코미":
 this.lv80a={baseHP:12524,baseDEF:611,baseATK:218},this.lv90={baseHP:13471,baseDEF:657,baseATK:234}
 this.mode=14
+this.Etype=2
 break;
 case "에일로이":
 this.lv80a={baseHP:10133,baseDEF:629,baseATK:217},this.lv90={baseHP:10899,baseDEF:676,baseATK:234}
 this.mode=1
+this.Etype=4
 break;
 case "토마":
 this.lv80a={baseHP:9616,baseDEF:699,baseATK:188},this.lv90={baseHP:10331,baseDEF:751,baseATK:202}
 this.mode=15
+this.Etype=3
 break;
 case "아라타키 이토":
 this.lv80a={baseHP:12740,baseDEF:865,baseATK:178},this.lv90={baseHP:13703,baseDEF:930,baseATK:191}
 this.mode=7
+this.Etype=6
 break;
 case "고로":
 this.lv80a={baseHP:8907,baseDEF:603,baseATK:170},this.lv90={baseHP:9570,baseDEF:648,baseATK:183}
 this.mode=16
+this.Etype=6
 break;
 case "신학":
 this.lv80a={baseHP:12080,baseDEF:772,baseATK:282},this.lv90={baseHP:12993,baseDEF:830,baseATK:304}
 this.mode=17
+this.Etype=4
 break;
 case "운근":
 this.lv80a={baseHP:9919,baseDEF:684,baseATK:178},this.lv90={baseHP:10657,baseDEF:734,baseATK:191}
 this.mode=16
+this.Etype=6
 break;
 case "야에 미코":
 this.lv80a={baseHP:9643,baseDEF:529,baseATK:316},this.lv90={baseHP:10372,baseDEF:569,baseATK:340}
 this.mode=18
+this.Etype=5
+case "카미사토 아야토":
+this.lv80a={baseHP:12751,baseDEF:715,baseATK:278},this.lv90={baseHP:13715,baseDEF:769,baseATK:299}
+this.mode=20
+this.Etype=2
+break;
+case "번개행자":
+this.lv80a={baseHP:10121.775421069935,baseDEF:635.2536499864582,baseATK:197.68778471910082,percentATK:23.999999463558197},this.lv90={baseHP:10874.91499475576,baseDEF:682.5215109506607,baseATK:212.39719698963927,percentATK:23.999999463558197}
+this.mode=19
+this.Etype=5
+break;
+case "야란":
+this.lv80a={baseHP:13434,baseDEF:509,baseATK:227,percentATK:23.999999463558197},this.lv90={baseHP:14450,baseDEF:548,baseATK:244,percentATK:23.999999463558197}
+this.mode=21
+this.Etype=2
+break;
+case "쿠키 시노부":
+this.lv80a={baseHP:11438,baseDEF:699,baseATK:198,percentATK:23.999999463558197},this.lv90={baseHP:12289,baseDEF:751,baseATK:212.39719698963927,percentATK:23.999999463558197}
+this.mode=22
+this.Etype=5
+break;
+case "시카노인 헤이조":
+this.lv80a={baseHP:9919,baseDEF:637,baseATK:210},this.lv90={baseHP:10657,baseDEF:684,baseATK:225}
+this.mode=0
+this.Etype=1
+break;
+case "타이나리":
+this.lv80a={baseHP:10087,baseDEF:585.91,baseATK:249.05},this.lv90={baseHP:10850,baseDEF:630.21,baseATK:267.88}
+this.mode=24
+this.Etype=7
+break;
+case "콜레이":
+this.lv80a={baseHP:9110,baseDEF:559.02,baseATK:185.83},this.lv90={baseHP:9787,baseDEF:600.62,baseATK:199.65}
+this.mode=25
+this.Etype=7
+break;
+case "풀행자":
+this.lv80a={baseHP:10121.775421069935,baseDEF:635.2536499864582,baseATK:197.68778471910082,percentATK:23.999999463558197},this.lv90={baseHP:10874.91499475576,baseDEF:682.5215109506607,baseATK:212.39719698963927,percentATK:23.999999463558197}
+this.mode=25
+this.Etype=7
+break;
+case "도리":
+this.lv80a={baseHP:11539,baseDEF:673.37,baseATK:207.57},this.lv90={baseHP:12397,baseDEF:723.47,baseATK:223.02}
+this.mode=15 
+this.Etype=5
+break;
+case "사이노":
+this.lv80a={baseHP:11613,baseDEF:798.84,baseATK:798.84},this.lv90={baseHP:12491,baseDEF:859.24,baseATK:318.11}
+this.mode=2
+this.Etype=5
+break;
+case "캔디스":
+this.lv80a={baseHP:10122,baseDEF:635.25,baseATK:197.69},this.lv90={baseHP:10875,baseDEF:682.52,baseATK:212.4}
+this.mode=15 
+this.Etype=2
+break;
+case "닐루":
+this.lv80a={baseHP:14117,baseDEF:677.37,baseATK:213.47},this.lv90={baseHP:15185,baseDEF:728.59,baseATK:229.61}
+this.mode=26
+this.Etype=2
+break;
+case "나히다":
+this.lv80a={baseHP:9632,baseDEF:585.91,baseATK:277.96},this.lv90={baseHP:10360,baseDEF:630.21,baseATK:298.97}
+this.mode=27
+this.Etype=7
+break;
+case "레일라":
+this.lv80a={baseHP:10324,baseDEF:609.84,baseATK:201.64},this.lv90={baseHP:11092,baseDEF:655.22,baseATK:216.65}
+this.mode=15
+this.Etype=4
+break;
+case "방랑자":
+this.lv80a={baseHP:9450,baseDEF:564.48,baseATK:304.64},this.lv90={baseHP:10164,baseDEF:607.16,baseATK:327.67}
+this.mode=0
+this.Etype=1
+break;
+case "파루잔":
+this.lv80a={baseHP:8907,baseDEF:584.43,baseATK:182.86},this.lv90={baseHP:9570,baseDEF:627.92,baseATK:196.47}
+this.mode=19
+this.Etype=1
+break;
+case "알하이탐":
+this.lv80a={baseHP:12410,baseDEF:726.67,baseATK:291.3},this.lv90={baseHP:13348,baseDEF:781.62,baseATK:313.32}
+this.mode=29
+this.Etype=7
+break;
+case "요요":
+this.lv80a={baseHP:11438,baseDEF:698.78,baseATK:197.69},this.lv90={baseHP:12289,baseDEF:750.77,baseATK:212.4}
+this.mode=22
+this.Etype=7
+break;
+case "데히야":
+this.lv80a={baseHP:14573,baseDEF:583.77,baseATK:246.82},this.lv90={baseHP:15675,baseDEF:627.91,baseATK:265.49}
+this.mode=28
+this.Etype=3
+break;
+case "미카":
+this.lv80a={baseHP:11640,baseDEF:552.67,baseATK:158.15},this.lv90={baseHP:12506,baseDEF:593.79,baseATK:169.92}
+this.mode=15
+this.Etype=4
+break;
+case "백출":
+this.lv80a={baseHP:12410,baseDEF:464.44,baseATK:179.0},this.lv90={baseHP:13348,baseDEF:499.56,baseATK:192.54}
+this.mode=15
+this.Etype=7
+break;
+case "카베":
+this.lv80a={baseHP:11134,baseDEF:698.78,baseATK:217.46},this.lv90={baseHP:11962,baseDEF:750.77,baseATK:233.64}
+this.mode=12
+this.Etype=7
+break;
+case "키라라":
+this.lv80a={baseHP:11336,baseDEF:508.2,baseATK:207.57},this.lv90={baseHP:12180,baseDEF:546.02,baseATK:223.02}
+this.mode=15
+this.Etype=7
+break;
+case "리니":
+this.lv80a={baseHP:10247,baseDEF:500.17,baseATK:295.74},this.lv90={baseHP:11021,baseDEF:537.99,baseATK:318.11}
+this.mode=1
+this.Etype=3
+break;
+case "리넷":
+this.lv80a={baseHP:11539,baseDEF:662.57,baseATK:215.48},this.lv90={baseHP:12397,baseDEF:711.87,baseATK:231.51}
+this.mode=3
+this.Etype=1
+break;
+case "프레미네":
+this.lv80a={baseHP:11235,baseDEF:659.39,baseATK:237.23},this.lv90={baseHP:12071,baseDEF:708.46,baseATK:254.88}
+this.mode=2
+this.Etype=4
+break;
+case "느비예트":
+this.lv80a={baseHP:13662,baseDEF:535.9,baseATK:193.68},this.lv90={baseHP:14695,baseDEF:576.42,baseATK:208.32}
+this.mode=21
+this.Etype=2
+break;
+case "라이오슬리":
+this.lv80a={baseHP:12637,baseDEF:709.53,baseATK:289.07},this.lv90={baseHP:13593,baseDEF:763.17,baseATK:310.93}
+this.mode=0
+this.Etype=4
 break;
 	default:
 break;
 	}
 }
+
 function SetCharS(n){
 	if (isNaN(GetE(n))){
 		document.getElementById(n).value="0"
@@ -395,14 +751,92 @@ function SetCharS(n){
 	SetChar(0)
 }
 
+function SetCharL(){
+	var temp
+	var temphtml='프리셋：<select id="Sets" onchange="SetChar(2)"><option>1</option>'
+	var temphtml2='</select> <button type="button" onclick="addset()">결과 저장하기</button>'
+	var temphtml3=' <button type="button" onclick="SetChar(1)">결과 복사하기</button>'
+	setsum=1
+	for (var i =2;i<=10; i++) {
+		temp=window.localStorage.getItem("ys"+document.getElementById('Char').value +i.toString())
+		if (temp!=null && temp!=""){
+			setsum+=1
+			temphtml+='<option>'+i.toString()+'</option>'
+		}
+	}
+	console.log(document.getElementById('Char').value)
+	if(onloading!=true){window.localStorage.setItem("ysbjjsq",document.getElementById('Char').value)}
+	document.getElementById('setlabel').innerHTML=temphtml+temphtml2+temphtml3
+	SetChar(2)
+}
+
+function addset(){
+	setsum+=1
+	var temphtml='프리셋：<select id="Sets" onchange="SetChar(2)">'
+	var temphtml2='</select> <button type="button" onclick="addset()">결과 저장하기</button>'
+	var temphtml3=' <button type="button" onclick="SetChar(1)">결과 복사하기</button>'
+	for (var i =1;i<=setsum; i++) {
+			temphtml+='<option>'+i.toString()+'</option>'
+	}
+	document.getElementById('setlabel').innerHTML=temphtml+temphtml2+temphtml3
+	document.getElementById('Sets').options[setsum-1].selected=true
+		document.getElementById('Level').options[0].selected=true;
+		document.getElementById('A1').options[1].selected=true;
+		document.getElementById('A2').options[4].selected=true;
+		document.getElementById('A3').options[5].selected=true;
+		document.getElementById('QQ').value="0"
+		document.getElementById('T1').value="0"
+		document.getElementById('T2').value="0"
+		document.getElementById('T3').value="0"
+		document.getElementById('T4').value="0"
+		document.getElementById('T5').value="0"
+		document.getElementById('T6').value="0"
+		document.getElementById('T7').value="0"
+		document.getElementById('result2').innerHTML=""
+		document.getElementById('result').innerHTML="세부사항을 입력해주세요"
+		window.location.href='#page1'
+}
+
+function remove(){
+	var temp=document.getElementById('Sets').value
+	var temp2="-프리셋"+temp
+	var temp3
+	if(temp=='1'){
+	temp=''
+	temp2=""
+	window.localStorage.removeItem('ys'+document.getElementById('Char').value);
+	}else{
+		for (var i =parseInt(temp);i<=setsum; i++) {
+			temp3=window.localStorage.getItem("ys"+document.getElementById('Char').value +(i+1).toString())
+			if (temp3!="" && temp3!=null){
+				window.localStorage.setItem("ys"+document.getElementById('Char').value +i.toString(),temp3)
+			}else{
+				window.localStorage.removeItem('ys'+document.getElementById('Char').value + i.toString());
+			}
+		}
+	}
+	alert("已清除本地储存里"+document.getElementById('Char').value+temp2+"的数据！")
+	SetCharL()
+}
+
 function Save(name){
+	var temp=document.getElementById('Sets').value
+	if(temp=='1'){temp=''}
 	n=document.getElementById('Level').value+"/"+document.getElementById('QQ').value+"/"+document.getElementById('T1').value+"/"+document.getElementById('T2').value+"/"+document.getElementById('T3').value+"/"+document.getElementById('T4').value+"/"+document.getElementById('T5').value+"/"+document.getElementById('T6').value+"/"+document.getElementById('T7').value+"/"
 	n=n+document.getElementById('A1').value+"/"+document.getElementById('A2').value+"/"+document.getElementById('A3').value+"/"
-	window.localStorage.setItem("ys"+name,n)
+	n=n+r[0].toFixed(1).toString()+"/"+r[1].toFixed(1).toString()+"/"+r[2].toFixed(1).toString()+"/"+r[3].toFixed(1).toString()+"/"+r[5].toFixed(1).toString()+"/"+r[6].toFixed(1).toString()+"/"+r[4].toFixed(1).toString()
+		if (ShowLoad==""){
+			n=n+"/0100110"
+		}else{
+			n=n+"/"+ShowLoad
+		}
+	window.localStorage.setItem("ys"+name+temp,n)
 }
 
 function Load(){
-	n=window.localStorage.getItem("ys"+document.getElementById('Char').value)
+	var temp=document.getElementById('Sets').value
+	if(temp=='1'){temp=''}
+	n=window.localStorage.getItem("ys"+document.getElementById('Char').value+temp)
 	if(n!=null){
 		temp=n.split("/");
 		document.getElementById('Level').options[2-parseInt(temp[0])].selected=true;
@@ -419,7 +853,11 @@ function Load(){
 			if(i<=4){if(document.getElementById('A2').options[i].value==parseInt(temp[10])){document.getElementById('A2').options[i].selected=true}}
 			if(document.getElementById('A3').options[i].value==parseInt(temp[11])){document.getElementById('A3').options[i].selected=true}
 		}
-		
+		ShowLoad=temp[19]
+		if (ShowLoad=="" || ShowLoad==undefined){
+			ShowLoad="0100110"
+		}
+		return true
 	}else{
 		document.getElementById('Level').options[0].selected=true;
 		document.getElementById('A1').options[1].selected=true;
@@ -433,78 +871,89 @@ function Load(){
 		document.getElementById('T5').value="0"
 		document.getElementById('T6').value="0"
 		document.getElementById('T7').value="0"
+		ShowLoad=""
+		return false
 	}
 }
 
 function SetChar(mtype){
-		var J = new userobject(document.getElementById('Char').value); 
+		var nt=document.getElementById('Char').value
+		var J = new userobject(nt); 
 		var hp;
 		var df;
 		var atk;
 		var a=[0,0,0,0,0,0,0];
-		var r=[0,0,0,0,0,0,0];
+		var sx=["바","물","불","얼","번","바","풀"] // 1: 바람 / 6: 바위
+		var fileexist=true
+		var weapont
 		res=""
 		res1=""
 		res2=""
 		res3=""
-		if (mtype==0){
-			Save(document.getElementById('Char').value)
-		}
+		res4=""
+		res5=""
+		//武器类型point
+		var it2=[' 요이미야 엠버 타르탈리아 디오나 피슬 감우 쿠죠 사라 에일로이 벤티 고로 야란 타이나리 콜레이 파루잔 리니 ',' 바바라 클레 리사 모나 응광 설탕 연비 산고노미야 코코미 야에 미코 시카노인 헤이조 나히다 방랑자 백출 느비예트 라이오슬리 ',' 소 라이덴 쇼군 호두 로자리아 향릉 종려 토마 신학 운근 캔디스 사이노 요요 미카 ',' 북두 다이루크 레이저 노엘 유라 사유 중운 신염 아라타키 이토 도리 데히야 카베 프레미네 ',' 알베도 카미사토 아야카 베넷 케이아 각청 카에데하라 카즈하 치치 진 행추 바람행자 바위행자 번개행자 카미사토 아야토 쿠키 시노부 풀행자 닐루 레일라 알하이탐 키라라 리넷 '];
+			for (var i =0;i<=4; i++) {
+				if (it2[i].indexOf(" "+document.getElementById('Char').value+" ")>=0){
+					weapont=i
+					break;
+				}
+			}	
 		if (mtype==2){
-			Load()
+			fileexist=Load()
+			//武器库point
+			var it=['<select id="Weapon" onchange="SetWeapon()"><option value="0">무기 선택</option><option value="674">기초공 674 (천날 등)</option><option value="608">기초공 608 (대마술/아모스/극지/비뢰/종탄노 등)</option><option value="542">기초공 542 (약수/사냥꾼 등)</option><option value="565">기초공 565 (제례/뒷골목/노을 등)</option><option value="510">기초공 510 (녹활/바람꽃/절현/담월 등)</option><option value="454">기초공 454 (페보/강철궁/파마궁 등)</option></select>','<select id="Weapon" onchange="SetWeapon()"><option value="0">무기 선택</option><option value="674">기초공 674 (현금흐름/두루마리/툴레이툴라 등)</option><option value="608">기초공 608 (카구라/자물쇠/사풍/도넛 등)</option><option value="542">기초공 542 (법전/천일밤 등)</option><option value="565">기초공 565 (하쿠신/만국/뒷골목 등)</option><option value="510">기초공 510 (호박/저녁별/페보/음유시인 등)</option><option value="454">기초공 454 (제례/도도코 등)</option></select>','<select id="Weapon" onchange="SetWeapon()"><option value="0">무기 선택</option><option value="741">기초공 741 (식재 등)</option><option value="674">기초공 674 (화박연/마루 등)</option><option value="608">기초공 608 (예초/호마/관홍 등)<option value="542">기초공 542 (적사지 등)</option><option value="620">기초공 620 (지느러미 등)</option><option value="565">기초공 565 (페보/천암/유월창 등)</option><option value="510">기초공 510 (어획 등)</option><option value="454">기초공 454 (결창/용학 등)</option></select>','<select id="Weapon" onchange="SetWeapon()"><option value="0">무기 선택</option><option value="741">기초공 741 (송뢰 등)</option><option value="674">기초공 674 (긍지 등)</option><option value="608">기초공 608 (무공/늑말/갈바등 등)</option><option value="542">기초공 542 (쇄석 등)</option><option value="565">기초공 565 (설장/고화 등)</option><option value="510">기초공 510 (백영검/이무기/천암/아쿠오마루 등)</option><option value="454">기초공 454 (페보/진주해황 등)</option></select>','<select id="Weapon" onchange="SetWeapon()"><option value="0">무기 선택</option><option value="674">기초공 674 (매검/회광 등)</option><option value="608">기초공 608 (후츠/참봉/서약/천공검 등)</option><option value="542">기초공 542 (반암/성현/잎가빛 등)</option><option value="620">기초공 620 (뒷골목 등)</option><option value="565">기초공 565 (참암 등)</option><option value="510">기초공 510 (부식/칠흑검/크시포스/용포/꽃잎비 등)</option><option value="454">기초공 454 (방추/아메노마/제례/페보 등)</option><option value="401">기초공 401 (여명신검 등)</option></select>'];
+			document.getElementById('WeaponList').innerHTML=it[weapont]
 		}
-		
-		
 		
 		if (document.getElementById('Level').value=="1"){
 			hp=J.lv80a["baseHP"]
 			df=J.lv80a["baseDEF"]
 			atk=J.lv80a["baseATK"]+GetE("QQ")
-			res3="80突破"+document.getElementById('Char').value+"，"
+			res3="80 돌파 "+document.getElementById('Char').value+"，"
 			}
 		else{
 			hp=J.lv90["baseHP"]
 			df=J.lv90["baseDEF"]
 			atk=J.lv90["baseATK"]+GetE("QQ")
-			res3="90级"+document.getElementById('Char').value+"，"
+			res3="90렙 "+document.getElementById('Char').value+"，"
 		}
 		
 		for (var i =1;i<=3; i++) {
 			a[document.getElementById('A'+i.toString()).value-1]=a[document.getElementById('A'+i.toString()).value-1]+1
 			switch(document.getElementById('A'+i.toString()).value-1){
 				case 0:
-					res3=res3+"生";
+					res4=res4+"체";
 					break;
 				case 1:
-					res3=res3+"攻";
+					res4=res4+"공";
 					break;
 				case 2:
-					res3=res3+"防";
+					res4=res4+"방";
 					break;
 				case 3:
-					res3=res3+"精";
+					res4=res4+"원마";
 					break;
 				case 4:
-					res3=res3+"充";
+					res4=res4+"원충";
 					break;
 				case 5:
-					res3=res3+"暴";
+					res4=res4+"치";
 					break;
 				case 6:
-					res3=res3+"爆";
+					res4=res4+"치";
 					break;
 				case 7:
-					res3=res3+"伤";
+					res4=res4+sx[J.Etype-1];
 					break;
 				case 8:
-					res3=res3+"治";
+					res4=res4+"치유";
 					break;	
 			default:
 				break;
 			}
 		}
-		res3=res3+"配置，"
-		
 		r[0]=((GetE("T1")-4780)/hp-0.466*a[0])/0.05	//生命
 		r[1]=((GetE("T2")-311)/atk-0.466*a[1])/0.05	//攻击
 		r[2]=(GetE("T3")/df-0.583*a[2])/0.062		//防御
@@ -513,117 +962,284 @@ function SetChar(mtype){
 		r[6]=(GetE("T6")-62.2*a[6])/6.6				//爆伤
 		r[4]=(GetE("T7")-51.8*a[4])/5.5				//充能
 
+		if(r[5]<0 && r[6]>0){
+			document.getElementById('A3').options[5].selected=true
+			r[6]=(GetE("T6")-62.2*(a[6]+1))/6.6	
+			r[5]=(GetE("T5")-31.1*(a[5]-1))/3.3
+			res4=res4[0]+res4[1]+"爆"
+		}
 		
-		if(r[0]+r[1]+r[2]+r[3]+r[4]+r[5]+r[6] > 50){res=res+"<p><font size='1' color='red'>*성유물 세부사항 값이 올바르지 않을 수 있습니다.</font></p>"}
+		if(r[5]>0 && r[6]<0){
+			document.getElementById('A3').options[4].selected=true
+			r[6]=(GetE("T6")-62.2*(a[6]-1))/6.6	
+			r[5]=(GetE("T5")-31.1*(a[5]+1))/3.3
+			res4=res4[0]+res4[1]+"暴"
+		}
 		
-		for (var i =0;i<=6; i++) {
-			if(r[0]<0){res=res+"<p><font size='1' color='red'>*성유물의 속성이나 세부사항 값이 올바르지 않을 수 있습니다.</font></p>";i=7}
+		var temppp=GetE("T5")*2+GetE("T6")
+		res3=res3+"성유물 주옵 "+res4+"，치확치피 "+temppp.toFixed(1).toString()+"점"
+		
+		if(r[0]+r[1]+r[2]+r[3]+r[4]+r[5]+r[6] > 53){res=res+"<p><font size='1' color='red'>*성유물 세부사항 값이 올바르지 않을 수 있습니다.</font></p>"}
+		
+		for (var i =1;i<=6; i++) {
+			if(r[i]<0){res=res+"<p><font size='1' color='red'>*성유물의 속성이나 세부사항 값이 올바르지 않을 수 있습니다.</font></p><p><font size='1' color='red'>（4성 성유물은 계산이 불가능합니다.）</font></p>";i=7}
 		}
 		
 		if(GetE("QQ")>741 || GetE("QQ")<=0){res=res+"<p><font size='1' color='red'>*무기 기초 공격력 데이터가 올바르지 않을 수 있습니다.</font></p>"}
 		
-		res=res+"<p><font size='2'>체력:"+r[0].toFixed(1).toString()+" <strong>|</strong> 공격:"+r[1].toFixed(1).toString()+" <strong>|</strong> 방어:"+r[2].toFixed(1).toString()+"</font></p>"
-		res=res+"<p><font size='2'>원마:"+r[3].toFixed(1).toString()+" <strong>|</strong> 원충:"+r[4].toFixed(1).toString()+" <strong>|</strong> 치확:"+r[5].toFixed(1).toString()+" <strong>|</strong> 치피:"+r[6].toFixed(1).toString()+"</font></p>"
-		if(J.mode!=6 && J.mode!=7){res1=res1+"<p>공 치명：<font size='4'>"+(r[5]+r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"}//호두和诺埃尔不显示这一条
-		
+		if(J.mode!=6 && J.mode!=7 && J.mode!=13 && J.mode!=14 && J.mode!=16 && J.mode!=18 && J.mode!=21 && J.mode!=24 && J.mode!=25 && J.mode!=26 && J.mode!=27 && J.mode!=29){res1=res1+"<p>공 치명：<font size='4'>"+(r[5]+r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"}
+		//胡桃、诺埃尔、雷电将军、珊瑚宫心海、五郎、八重神子、야란、草系、닐루、나히다、알하이탐不显示默认的这一条
+		var tempshowload
+
 		switch(J.mode){
 			case 0://一般通用
+			{tempshowload="0100110"}
 				break;
 			case 1://火水冰通用
 			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101110"}
 				break;
 			case 2://火水冰充能工具人通用
 			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101111"}
 				break;
 			case 3://一般充能工具人通用
 			res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0100111"}
 				break;
 			case 4://알베도
 			res1=res1+"<p>방 치명：<font size='4'>"+(r[5]+r[2]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0010110"}
 				break;
 			case 5://종려
 			res1=res1+"<p>공 체 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[6]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 체 원충 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1100111"}
 				break;
 			case 6://호두
 			res1=res1+"<p>체 원마 치피：<font size='4'>"+(r[0]+r[3]+r[6]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>체 원마 치명：<font size='4'>"+(r[0]+r[3]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 체 원마 치명（공격력은 0.4로 계산）：<font size='4'>"+(r[0]+r[3]+r[5]+r[6]+r[1]*0.4).toFixed(1).toString()+"</font>점</p>"
+                {tempshowload="1101110"}
 				break;
-			case 7://노엘
+			case 7://노엘, 이토
 			res1=res1+"<p>방 치명：<font size='4'>"+(r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 방 치명：<font size='4'>"+(r[1]+r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 방 원충 치명：<font size='4'>"+(r[1]+r[2]+r[4]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 방 치명（공격력은 0.4로 계산）：<font size='4'>"+(r[1]*0.4+r[2]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 방 원충 치명 (공격력은0.4로 계산）：<font size='4'>"+(r[1]*0.4+r[2]+r[4]+r[6]+r[5]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0110111"}
 				break;
 			case 8://生命值奶妈
 			res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원충 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1000001"}
 				break;
 			case 9://설탕
 			res1=res1+"<p>원마：<font size='4'>"+(r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0001000"}
 				break;
-			case 10://유라
+			case 10://유라 아야카
 			res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
-			res1=res1+"<p>공 치피：<font size='4'>"+(r[1]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0100111"}
 				break;
 			case 11://벤티
 			res1=res1+"<p>공 원충 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101111"}
 				break;
-			case 12://카즈하
+			case 12://카즈하, 카베
 			res1=res1+"<p>원마 원충：<font size='4'>"+(r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101111"}
 				break;
             case 13://라이덴 쇼군
             res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
-                break;
+			{tempshowload="0100111"}
+				break;
             case 14://산고노미야 코코미
-            res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
-            res1=res1+"<p>체 공 원충：<font size='4'>"+(r[0]+r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
-            res1=res1+"<p>체 공 원마 원충：<font size='4'>"+(r[0]+r[1]+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
-                break;
-			case 15://토마
 			res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 공 원충（공격력은 0.4로 계산）：<font size='4'>"+(r[0]+r[1]*0.4+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 공 원마 원충（공격력은 0.4로 계산）：<font size='4'>"+(r[0]+r[1]*0.4+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1000001"}
+				break;
+			case 15://토마、백출、키라라
+			res1=res1+"<p>체 원충：<font size='4'>"+(r[0]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원충 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1000001"}
 				break;	
             case 16://고로, 운근
 			res1=res1+"<p>방 원충：<font size='4'>"+(r[2]+r[4]).toFixed(1).toString()+"</font>점</p>"
-                break;
+			{tempshowload="0010001"}
+				break;	
             case 17://신학
 			res1=res1+"<p>공 원충：<font size='4'>"+(r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
-			    break;	
+			{tempshowload="0100001"}
+			break;	
 			case 18://야에 미코
 			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[5]+r[1]+r[3]+r[6]).toFixed(1).toString()+"</font>점</p>"
 			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[5]+r[1]+r[3]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
-			    break;
+			{tempshowload="0101111"}
+			break;	
+			case 19://번개행자
+			res1=res1+"<p>원충：<font size='4'>"+(r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0100111"}
+			break;	
+			case 20://绫人
+			res1=res1+"<p>공 체 치명（체력은 0.5로 계산）：<font size='4'>"+(r[5]+r[1]+r[0]*0.5+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원마 치명（체력은 0.5로 계산）：<font size='4'>"+(r[5]+r[1]+r[0]*0.5+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1101110"}
+			break;
+			case 21://야란
+			res1=res1+"<p>체 치명：<font size='4'>"+(r[5]+r[0]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 원충 치명：<font size='4'>"+(r[5]+r[0]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1000111"}
+			break;
+			case 22://쿠키 시노부
+			res1=res1+"<p>체：<font size='4'>"+(r[0]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 원마：<font size='4'>"+(r[0]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1001000"}
+			break;
+			case 23://辛焱
+			res1=res1+"<p>공 방 치명：<font size='4'>"+(r[1]+r[2]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0110110"}
+			break;
+			case 24://타이나리
+			res1=res1+"<p>원마 치명：<font size='4'>"+(r[3]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[3]+r[5]+r[6]+r[1]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101110"}
+			break;
+			case 25://草主、콜레이
+			res1=res1+"<p>원마 치명：<font size='4'>"+(r[3]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>원마 원충 치명：<font size='4'>"+(r[3]+r[5]+r[6]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 치명：<font size='4'>"+(r[3]+r[5]+r[6]+r[1]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[3]+r[5]+r[6]+r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101111"}
+			break;
+			case 26://닐루
+			res1=res1+"<p>체：<font size='4'>"+(r[0]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 원마 치명：<font size='4'>"+(r[5]+r[0]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>체 원마 원충 치명：<font size='4'>"+(r[5]+r[0]+r[4]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1001111"}
+			break;
+			case 27://나히다
+			res1=res1+"<p>원마 치명：<font size='4'>"+(r[5]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[5]+r[1]+r[4]+r[6]+r[3]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101111"}
+			break;
+			case 28://데히야
+			res1=res1+"<p>공 원충 치명：<font size='4'>"+(r[5]+r[1]+r[4]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[5]+r[6]+r[3]+r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 체 원마 원충 치명：<font size='4'>"+(r[5]+r[1]+r[0]+r[6]+r[3]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="1101111"}
+			break;
+			case 29://알하이탐
+			res1=res1+"<p>원마 치명：<font size='4'>"+(r[3]+r[5]+r[6]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>원충 원마 치명：<font size='4'>"+(r[3]+r[5]+r[6]+r[1]).toFixed(1).toString()+"</font>점</p>"
+			res1=res1+"<p>공 원마 원충 치명：<font size='4'>"+(r[3]+r[5]+r[6]+r[1]+r[4]).toFixed(1).toString()+"</font>점</p>"
+			{tempshowload="0101111"}
+			break;
 			default:
 				break;
 		}
+
+		switch(J.Etype){
+			case 1:
+				res5="#66CDAA"
+				break;
+			case 2:
+				res5="#1E90FF"
+				break;
+			case 3:
+				res5="#DC143C"
+				break;
+			case 4:
+				res5="#00BFFF"
+				break;
+			case 5:
+				res5="#8A2BE2"
+				break;
+			case 6:
+				res5="#DAA520"
+				break;	
+			case 7:
+				res5="#70AD47"
+				break;	
+			default:
+				break;
+		}
+
+		if (ShowLoad=="" || ShowLoad==undefined){
+			ShowLoad=tempshowload
+		}else{
+			tempshowload=ShowLoad
+		}
+		var temp6=0
+		for (var i =0;i<=6; i++) {
+			var j=i
+			if (j==4){j=5}
+			else if (j==5){j=6}
+			else if (j==6){j=4}
+
+			if(tempshowload[i]=='1'){
+				cc[i]="'"+res5+"'> <b"
+					var temp7=checkname(nt)
+					if(temp7>0){
+						if(j==lastcheck){
+							temp6+=r[j]*temp7
+						}else{
+							temp6+=r[j]
+						}
+					}else{
+						temp6+=r[j]
+					}
+				//cc[i]="'"+"#2d0c13"+"'> <b"
+			}else{
+				cc[i]="'#b598a1'"
+			}
+		}
+		temp6=temp6.toFixed(1)
+		if(res1.indexOf(naturecall(tempshowload))<0){
+			var tempgg=checkname(nt)
+			res1="<p>"+naturecall(tempshowload)+"（自定义"+ ((tempgg>0 && tempshowload[lastcheck]=="1")?"，"+lastcheckstr+"은 "+tempgg.toFixed(1)+"로 계산":"")  +"）：<font size='4'>"+temp6.toString()+"</font>점</p>"+res1
+		}
+		res1=res1.replace(/（/g, "<font size='2'>（")
+		res1=res1.replace(/）/g, "）</font>")		
 		
-		if(GetE("QQ")==542){
-			res2=res2+"<p><font size='2'>——磐岩结绿附加攻击——</font></p>"
-			res2=res2+"<p><font size='2'>1精："+(r[0]*0.218402778).toFixed(1).toString()+"점</p>"
-			res2=res2+"<p><font size='2'>2精："+(r[0]*0.273003472).toFixed(1).toString()+"점</p>"
-			res2=res2+"<p><font size='2'>3精："+(r[0]*0.327604167).toFixed(1).toString()+"점</p>"
-			res2=res2+"<p><font size='2'>4精："+(r[0]*0.382204861).toFixed(1).toString()+"점</p>"
-			res2=res2+"<p><font size='2'>5精："+(r[0]*0.436805556).toFixed(1).toString()+"점</p>"
+		res=res+"<p><font size='2' color="+cc[0]+">체 "+r[0].toFixed(1).toString()+"</b></font> | <font size='2' color="+cc[1]+">공 "+r[1].toFixed(1).toString()+"</b></font> | <font size='2' color="+cc[2]+">방 "+r[2].toFixed(1).toString()+"</b></font></p>"
+		res=res+"<p><font size='2' color="+cc[3]+">원마 "+r[3].toFixed(1).toString()+"</b></font> | <font size='2' color="+cc[6]+">원충 "+r[4].toFixed(1).toString()+"</b></font> | <font size='2' color="+cc[4]+">치확 "+r[5].toFixed(1).toString()+"</b></font> | <font size='2' color="+cc[5]+">치피 "+r[6].toFixed(1).toString()+"</b></font></p>"
+
+		document.getElementById('result2').innerHTML="<font size='3' color='"+res5+"'><b>"+res3+"</b></font>"
+		if(GetE("QQ")==542 && (weapont==4)){
+			res2=res2+"<p><font size='2'>——반암 재련에 따른 추가 점수——</font></p>"
+			res2=res2+"<p><font size='2'>1재："+(r[0]*0.218402778).toFixed(1).toString()+"점</p>"
+			res2=res2+"<p><font size='2'>2재："+(r[0]*0.273003472).toFixed(1).toString()+"점</p>"
+			res2=res2+"<p><font size='2'>3재："+(r[0]*0.327604167).toFixed(1).toString()+"점</p>"
+			res2=res2+"<p><font size='2'>4재："+(r[0]*0.382204861).toFixed(1).toString()+"점</p>"
+			res2=res2+"<p><font size='2'>5재："+(r[0]*0.436805556).toFixed(1).toString()+"점</p>"
 		}
 		
-		document.getElementById('result').innerHTML=res+res1+res2
+		if(fileexist){
+			document.getElementById('result').innerHTML=res+res1+res2
+			if(onloading!=true && mtype!=0){window.location.href='#anchor'}
+		}else{
+			document.getElementById('result2').innerHTML=""
+			document.getElementById('result').innerHTML="세부사항을 입력해주세요"
+		}
+		
+		if (mtype==0){
+			Save(document.getElementById('Char').value)
+		}
 		
 		if(mtype==1){
-			//var temp="生攻防精充暴爆"
-			//	for (var i =1;i<=7; i++) {
-			//		if(res1.indexOf(temp[i])>0){
-			//			res3=res3+"\r\n"+temp[i]
-			//		}
-			//	}
 			res1=res1.replace(/：/g, "")
 			res1=res1.replace(/<\/p><p>/g, "，")
 			res1=res1.replace(/<p>/g, "")
 			res1=res1.replace(/<\/p>/g, "")
 			res1=res1.replace(/<font size='4'>/g, "")
+			res1=res1.replace(/<font size='2'>/g, "")
 			res1=res1.replace(/<\/font>/g, "")
-			
-			res3=res3+res1
+			res1=res1.replace(/성유물 주옵 >/g, "성유물 주옵 为")
+			res3=res3+"，"+res1
 			
 			return(copytxt(res3))
 		}
@@ -633,9 +1249,24 @@ function GetE(n){
 	return parseFloat(document.getElementById(n).value)
 }
 
- window.onload = function () {
+window.onload = function () {
+		onloading=true
 		Load()
+		var tempc=window.localStorage.getItem("ysbjjsq")
+		SetCharL()
+		onloading=false
+		charcache=document.getElementById("Char")
+
+		//var tempc=window.localStorage.getItem("ysbjjsq")
+		console.log(tempc)
+		//tempc="카미사토 아야토"
+		for (var i =0;i<=charcache.options.length-1;i++) {
+			if(charcache.options[i].value==tempc){
+				document.getElementById("Char").options[i].selected=true;
+				SetCharL();
+			}
 		}
+	}
 		
 function copytxt(txt){
     var input = document.createElement('input');
@@ -648,4 +1279,202 @@ function copytxt(txt){
     return res;
 }
 
+function SetWeapon(){
+	var temp=document.getElementById("Weapon").value
+	if(temp!="0"){
+		document.getElementById("QQ").value=temp
+		Save(document.getElementById('Char').value)
+		SetChar(0)
+	}
+}
+
+function ShowPage2(mode){
+	var temp=charcache
+	var temphtml=""
+	for (var i =0;i<=temp.options.length-1;i++) {
+		n=window.localStorage.getItem("ys"+temp.options[i].value)
+		if(n!=null){
+			var temp2=n.split("/");
+			if (temp2[19]!="" && temp2[19]!=undefined){
+				var J1 = new userobject(temp.options[i].value); 
+				var res5=""
+				switch(J1.Etype){
+					case 1:
+						res5="#66CDAA"
+						break;
+					case 2:
+						res5="#1E90FF"
+						break;
+					case 3:
+						res5="#DC143C"
+						break;
+					case 4:
+						res5="#00BFFF"
+						break;
+					case 5:
+						res5="#8A2BE2"
+						break;
+					case 6:
+						res5="#DAA520"
+						break;	
+					case 7:
+						res5="#70AD47"
+						break;
+					default:
+						break;
+				}
+				if(mode==2){
+					temphtml+="<tr align='center'><td><p id='name"+i.toString()+"'><font color='"+res5+"'>"+temp.options[i].value+'</font></p></td>'+'<td><p id="result'+i.toString()+'">100</p></td>'+'<td class="td-3"><input onchange="update()"'+(temp2[19][0]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[12]+'" id="check'+i.toString()+'1" />生'+temp2[12]+" "
+					temphtml+='<input onchange="update()"'+(temp2[19][1]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[13]+'" id="check'+i.toString()+'2" />攻'+temp2[13]+" "
+					temphtml+='<input onchange="update()"'+(temp2[19][2]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[14]+'" id="check'+i.toString()+'3" />防'+temp2[14]+" "
+					temphtml+='<input onchange="update()"'+(temp2[19][3]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[15]+'" id="check'+i.toString()+'4" />精'+temp2[15]+" "
+					temphtml+='<input onchange="update()"'+(temp2[19][4]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[16]+'" id="check'+i.toString()+'5" />暴'+temp2[16]+" "
+					temphtml+='<input onchange="update()"'+(temp2[19][5]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[17]+'" id="check'+i.toString()+'6" />爆'+temp2[17]+" "
+					temphtml+='<input onchange="update()"'+(temp2[19][6]=="1"?'checked=""' : "")+' type="checkbox" value="'+temp2[18]+'" id="check'+i.toString()+'7" />充'+temp2[18]+" </tr>"
+				}else{
+					var temp3=0
+					var temp4=""
+					var temp5=""
+					for (var j =1;j<=7;j++) {
+						if(temp2[19][j-1]=="1"){
+							var nt=temp.options[i].value
+							var temp8=checkname(nt)
+							if(temp8>0){
+								if((j-1)==lastcheck){
+									temp3+=parseFloat(temp2[11+j])*temp8
+								}else{
+									temp3+=parseFloat(temp2[11+j])
+								}
+							}else{
+								temp3+=parseFloat(temp2[11+j])
+							}
+						}
+					}
+					temp4=naturecall(temp2[19])
+					for (var j =1;j<=3;j++) {
+						switch(parseInt(temp2[8+j])){
+							case 1:
+								temp5+="공 "
+								break;
+							case 2:
+								temp5+="체 "
+								break;
+							case 3:
+								temp5+="방 "
+								break;
+							case 4:
+								temp5+="원마 "
+								break;
+							case 5:
+								temp5+="원충 "
+								break;
+							case 6:
+								temp5+="치확 "
+								break;	
+							case 7:
+								temp5+="치피 "
+								break;					
+							case 8:
+								temp5+="伤"
+								break;
+							case 9:
+								temp5+="치유 "
+								break;
+							default:
+								break;
+						}
+					}
+					temp3=temp3.toFixed(1)
+					
+
+					var tempstr='window.localStorage.setItem("ysbjjsq","'+temp.options[i].value+'");location.reload()'
+					temphtml+="<tr align='center'><td><p id='name"+i.toString()+"' onclick="+tempstr+"><font color='"+res5+"'>"+temp.options[i].value+'</font></p></td>'+'<td><p id="result'+i.toString()+'">'+temp3.toString()+'条</p></td>'+'<td >'+(parseFloat(temp2[6])*2+parseFloat(temp2[7])).toFixed(1).toString()+'分</td><td>'+temp4+'</td><td><b>'+temp5+'</b></td></tr>'
+				}
+			}
+		}
+	}
+	if (mode==2){
+		document.getElementById("page1").innerHTML='<table border="1" align="center" class="gridtable"><tr><th>角色</th><th>共计</th><th>选择有效词条</th></tr>'+temphtml+'</table>'
+		document.getElementById("buttonlabel").innerHTML='<p align="center" class="tip"><font size="2">*在本地计算过的不同的角色的结果（仅限프리셋1）会以列表形式显示在此，可自行选择对你来说有效的词条</font></p><p align="center"><button type="button" class="red" onclick="window.location.href=\'\'" ><--返回</button> <button type="button" onclick="ShowPage2(1)" class="blue">显示更多结果</button></p>'
+		//window.location.href='#page1'
+		update()
+	}else{
+		document.getElementById("page1").innerHTML='<table border="1" align="center" class="gridtable"><tr><th>角色</th><th>共计</th><th>双爆</th><th>使用副词条</th><th>성유물 주옵 </th></tr>'+temphtml+'</table>'
+		document.getElementById("buttonlabel").innerHTML='<p align="center" class="tip"><font size="2">*在本地计算过的不同的角色的结果（仅限프리셋1）会以列表形式显示在此，可自行选择对你来说有效的词条</font></p><p align="center"><button type="button" class="red" onclick="window.location.href=\'\'" ><--返回</button> <button type="button" onclick="ShowPage2(2)" class="blue">选择有效词条</button></p>'
+		//window.location.href='#page1'
+	}
+}
+
+function update(){
+	for (var i =0;i<=1000;i++) {
+		var temp=document.getElementById("result"+i.toString())
+		if(temp!=null){
+		var sum=0
+		var it=""
+			for (var j =1;j<=7;j++) {
+				if(document.getElementById("check"+i.toString()+j.toString()).checked){
+					var nt=charcache.options[i].value
+					var temp8=checkname(nt)
+					if(temp8>0){
+						if(j==(lastcheck+1)){
+							sum=sum+parseFloat(document.getElementById("check"+i.toString()+j.toString()).value)*temp8
+						}else{
+							sum=sum+parseFloat(document.getElementById("check"+i.toString()+j.toString()).value)
+						}
+					}else{
+						sum=sum+parseFloat(document.getElementById("check"+i.toString()+j.toString()).value)
+					}
+					it+="1"
+				}else{
+					it+="0"
+				}
+			}
+			temp.innerHTML=sum.toFixed(1)
+			n=window.localStorage.getItem("ys"+document.getElementById("name"+i.toString()).innerText)
+			var temp2=n.split("/");
+			temp2[19]=it
+			it=""
+			for (var j =0;j<=19;j++) {
+				it+=temp2[j]+"/"
+			}
+			window.localStorage.setItem("ys"+document.getElementById("name"+i.toString()).innerText,it)
+		}
+	}
+}
+
+function naturecall(s){
+	var answer=''
+					if(s[1]=="1"){answer+="공 "}
+					if(s[0]=="1"){answer+="체 "}
+					if(s[2]=="1"){answer+="방 "}
+					if(s[3]=="1"){answer+="원마 "}
+					if(s[6]=="1"){answer+="원충 "}
+					if(s[4]=="1"){answer+="치확 "}
+					if(s[5]=="1"){answer+="치피 "}
+					answer=answer.replace(/치확 치피 /g, "치명")
+	return answer;
+}
+
+//折算point
+function checkname(n){
+	if(n=="호두" || n=="노엘" || n=="아라타키 이토" || n=="산고노미야 코코미"){
+		lastcheck=1;
+		lastcheckstr="공격력"
+		return 0.4
+	}
+	if(n=="카미사토 아야토"){
+		lastcheck=0;
+		lastcheckstr="체력"
+		return 0.5
+	}
+		lastcheck=-1;
+		lastcheckstr=""
+		return -1
+}
+
+function info(){
+	alert("使用方法：\n1、选好角色和等级(80突破以下直接使用80突破即可)\n2、然后选择好沙漏、杯子和帽子的성유물 주옵 \n3、填写（或选择）武器的攻击力白值\n4、游戏内点开角色→圣遗物→圣遗物详情按钮，在表格中依次填入对应项目的数值")
+}
 </script>
+</body>
+</html>
