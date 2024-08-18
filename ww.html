@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: OS_Windows_Product_0.9.0_1127687_0.9.0_1127687 (2024-02-19)</i></label>
+        <label><i>Current version: 1.2.9 (2024-08-19)</i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -86,15 +86,21 @@
         const langs = ["en", "ko", "zh", "ja"];
         var textmap = {};
 
+        function saveData(data, lang) {
+            textmap[lang] = data;
+        }
+
         function loadJSON() {
-           fetch(`./ww/MultiText-Output.json`)
-                .then(response => response.json())
-                .then(data => {
-                    // Process the JSON object here
-                    textmap = data;
-                })
-                .catch(error => {
-                    console.error('Error fetching JSON:', error);
+            langs.forEach(lang => {
+                fetch(`./ww/MultiText_${lang}.json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process the JSON object here
+                        saveData(data, lang);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching JSON:', error);
+                    });
             });
         }
         
@@ -104,7 +110,6 @@
             outputDiv.textContent = `Searched result: ${outputArray.length}`;
 
             searchTable.innerHTML = '';
-
             outputArray.forEach(sentences => {
                 var rowKr = document.createElement("tr");
                 var rowCn = document.createElement("tr");
@@ -116,13 +121,13 @@
                 sentenceId.setAttribute('rowSpan', '4')
 
                 var sentenceKrDesc = document.createElement("td");
-                sentenceKrDesc.innerHTML = textmap[sentences[0]].ko.replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceKrDesc.innerHTML = textmap.ko[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceCnDesc = document.createElement("td");
-                sentenceCnDesc.innerHTML = textmap[sentences[0]].zh.replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceCnDesc.innerHTML = textmap.zh[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceEnDesc = document.createElement("td");
-                sentenceEnDesc.innerHTML = textmap[sentences[0]].en.replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceEnDesc.innerHTML = textmap.en[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceJpDesc = document.createElement("td");
-                sentenceJpDesc.innerHTML = textmap[sentences[0]].ja.replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceJpDesc.innerHTML = textmap.ja[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
 
                 rowKr.appendChild(sentenceId);
 
@@ -141,7 +146,12 @@
         function handleKeyDown(event) {
             if (event.key === 'Enter') {
                 const inputText = event.target.value;
-                outputArray = Object.entries(textmap).filter(item => item[1][document.querySelector('input[name="searchtype"]:checked').value] !== null ? item[1][document.querySelector('input[name="searchtype"]:checked').value].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
+                if (langs.includes(document.querySelector('input[name="searchtype"]:checked').value)){
+                    outputArray = Object.entries(textmap[document.querySelector('input[name="searchtype"]:checked').value]).filter(item => item[1] !== null ? item[1].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
+                }
+                else {
+                    outputArray = Object.entries(textmap.ko).filter(item => item[0] !== null ? item[0].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
+                }
                 
                 processInput(inputText, outputArray);
             }
