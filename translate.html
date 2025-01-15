@@ -65,15 +65,15 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: output_8342349_5dd1183d065d (2024-11-03)</i></label>
+        <label><i>Current version: D9089132_A9089132_L9089991 (2025-01-13)</i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
         <form>
-            <input type="radio" name="searchtype" value="kr" checked><label for="kr">kr</label>
-            <input type="radio" name="searchtype" value="en"><label for="en">en</label>
-            <input type="radio" name="searchtype" value="cn"><label for="cn">cn</label>
-            <input type="radio" name="searchtype" value="jp"><label for="jp">jp</label>
+            <input type="radio" name="searchtype" value="KR" checked><label for="KR">KR</label>
+            <input type="radio" name="searchtype" value="EN"><label for="EN">EN</label>
+            <input type="radio" name="searchtype" value="CHS"><label for="CHS">CHS</label>
+            <input type="radio" name="searchtype" value="JP"><label for="JP">JP</label>
         </form>
 
         <div id="output"></div>
@@ -92,7 +92,7 @@
 
         function loadJSON() {
             langs.forEach(lang => {
-                fetch(`./2.6/HashTextmap_${lang}.json`)
+                fetch(`./3.0/TextMap${lang}.json`)
                     .then(response => response.json())
                     .then(data => {
                         // Process the JSON object here
