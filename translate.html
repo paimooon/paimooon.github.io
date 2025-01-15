@@ -121,13 +121,13 @@
                 sentenceId.setAttribute('rowSpan', '4')
 
                 var sentenceKrDesc = document.createElement("td");
-                sentenceKrDesc.innerHTML = textmap.kr[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceKrDesc.innerHTML = textmap.KR[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceCnDesc = document.createElement("td");
-                sentenceCnDesc.innerHTML = textmap.cn[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceCnDesc.innerHTML = textmap.CHS[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceEnDesc = document.createElement("td");
-                sentenceEnDesc.innerHTML = textmap.en[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceEnDesc.innerHTML = textmap.EN[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
                 var sentenceJpDesc = document.createElement("td");
-                sentenceJpDesc.innerHTML = textmap.jp[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
+                sentenceJpDesc.innerHTML = textmap.JP[sentences[0]].replace(/\u00a0/g, " ").replace(/\\n/g, "<br>");
 
                 rowKr.appendChild(sentenceId);
 
@@ -150,7 +150,7 @@
                     outputArray = Object.entries(textmap[document.querySelector('input[name="searchtype"]:checked').value]).filter(item => item[1] !== null ? item[1].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
                 }
                 else {
-                    outputArray = Object.entries(textmap.kr).filter(item => item[0] !== null ? item[0].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
+                    outputArray = Object.entries(textmap.KR).filter(item => item[0] !== null ? item[0].replace(/\u00a0/g, " ").toLowerCase().includes(event.target.value.toLowerCase()) : false);
                 }
                 
                 processInput(inputText, outputArray);
