@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary File Reader</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropArea = document.getElementById("drop-area");
+            const fileInput = document.getElementById("file-input");
+            const tableBody = document.getElementById("table-body");
+
+            dropArea.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                dropArea.classList.add("dragging");
+            });
+
+            dropArea.addEventListener("dragleave", () => {
+                dropArea.classList.remove("dragging");
+            });
+
+            dropArea.addEventListener("drop", (event) => {
+                event.preventDefault();
+                dropArea.classList.remove("dragging");
+
+                const file = event.dataTransfer.files[0];
+                if (file) {
+                    readBinaryFile(file);
+                }
+            });
+
+            dropArea.addEventListener("click", () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener("change", (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    readBinaryFile(file);
+                }
+            });
+
+            function readCustomInt16(dataView, offset) {
+                const highByte = dataView.getUint8(offset);
+                const lowByte = dataView.getUint8(offset + 1);
+                const result = (highByte << 8) | lowByte;
+                return { value: result, offset: offset + 2 };
+            }
+
+            function readCustomInt32(dataView, offset) {
+                const byte1 = dataView.getUint8(offset);
+                const byte2 = dataView.getUint8(offset + 1);
+                const byte3 = dataView.getUint8(offset + 2);
+                const byte4 = dataView.getUint8(offset + 3);
+                const value = (byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4;
+                return { value, offset: offset + 4 };
+            }
+
+            function readBinaryFile(file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const buffer = event.target.result;
+                    const dataView = new DataView(buffer);
+
+                    let offset = 0;
+                    tableBody.innerHTML = ""; // Clear table
+                    const textDecoder = new TextDecoder("utf-8");
+
+                    var res = readCustomInt16(dataView, offset);
+                    var val = res.value;
+                    offset = res.offset;
+                    var stringBytes = new Uint8Array(buffer, offset, val);
+                    var string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    var row = `<tr><td>Branch</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    res = readCustomInt32(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    row = `<tr><td>Revision</td><td>${val}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    res = readCustomInt32(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    row = `<tr><td>MajorVersion</td><td>${val}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    res = readCustomInt32(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    row = `<tr><td>MinorVersion</td><td>${val}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    res = readCustomInt32(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    row = `<tr><td>PatchVersion</td><td>${val}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    for (let i = 0; i < 15; i++) {
+                        res = readCustomInt32(dataView, offset);
+                        val = res.value;
+                        offset = res.offset;
+                        row = `<tr><td>${i}</td><td>${val}</td></tr>`;
+                        // tableBody.insertAdjacentHTML("beforeend", row);
+                    }
+
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>Time</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>PakType</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>PakTypeDetail</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>StartAsset</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>StartDesignData</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>DispatchSeed</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>VersionString</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                    
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>VersionHash</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+
+                    res = readCustomInt32(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    row = `<tr><td>GameCoreVersion</td><td>${val}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    val = dataView.getInt8(offset);
+                    offset += 1;
+                    row = `<tr><td>IsEnableExcludeAsset</td><td>${val}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                    res = readCustomInt16(dataView, offset);
+                    val = res.value;
+                    offset = res.offset;
+                    stringBytes = new Uint8Array(buffer, offset, val);
+                    string = textDecoder.decode(stringBytes).replace(/\0/g, "");
+                    offset += val;
+                    row = `<tr><td>Sdk_PS_Client_Id</td><td>${string}</td></tr>`;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+
+                };
+
+                reader.readAsArrayBuffer(file);
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #drop-area {
+            width: 100%;
+            max-width: 400px;
+            height: 150px;
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        #drop-area.dragging {
+            background-color: #e7f3ff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        #file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary File Reader</h1>
+    <div id="drop-area">Drag your binary file here or click to select a file</div>
+    <input type="file" id="file-input" />
+    <table>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Rows will be populated here -->
+        </tbody>
+    </table>
+</body>
+</html>
