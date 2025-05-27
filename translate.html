@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: D9888087_A9887814_L9888182 (2025-04-07)</i></label>
+        <label><i>Current version: D10443544_A10426852_L10374999 (2025-05-21)</i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -92,7 +92,7 @@
 
         function loadJSON() {
             langs.forEach(lang => {
-                fetch(`./3.2/TextMap${lang}.json`)
+                fetch(`./3.3/TextMap${lang}.json`)
                     .then(response => response.json())
                     .then(data => {
                         // Process the JSON object here
