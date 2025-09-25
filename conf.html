@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>app.conf.dat Decrypter</title>
+  <style>
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; max-width:900px;margin:24px auto;padding:18px}
+    h1{font-size:1.25rem;margin-bottom:6px}
+    label{display:block;margin:10px 0 6px}
+    input[type=text], textarea, pre{width:100%;box-sizing:border-box;padding:8px;border:1px solid #ddd;border-radius:8px}
+    input[type=file]{padding:12px;font-size:1rem;border:2px dashed #888;border-radius:12px;width:100%;cursor:pointer}
+    .controls{display:flex;gap:8px;align-items:center;margin-top:8px}
+    button{padding:8px 12px;border-radius:8px;border:1px solid #bbb;background:#f6f6f6;cursor:pointer}
+    #output{margin-top:14px}
+    pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;max-height:60vh}
+    .small{font-size:0.85rem;color:#555}
+    .ok{color:green}
+    .err{color:#b00020}
+    #importantValues{margin:16px 0;padding:12px;background:#f0f4ff;border-left:4px solid #3366cc;border-radius:8px}
+    #importantValues h2{margin:0 0 8px;font-size:1.2rem}
+    #importantValues p{font-size:1.1rem;margin:6px 0}
+    #importantValues span{font-weight:bold;color:#222}
+  </style>
+</head>
+<body>
+  <h1>app.conf.dat Decrypter</h1>
+
+  <label>Select app.conf.dat file</label>
+  <input id="file" type="file" />
+
+  <input hidden id="key" type="text" value="1qck4mmSyJ+YQ10PKzdZ6+J6AuvUAR8TS/7AiIDNyTA=" />
+  <input hidden id="iv" type="text" value="00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00" />
+
+  <div class="controls">
+    <div id="status" class="small"></div>
+  </div>
+
+  <div id="importantValues" style="display:none;">
+    <h2>Extracted Values</h2>
+    <p>LauncherId: <span id="launcherId"></span></p>
+    <p>PlatApp: <span id="platApp"></span></p>
+  </div>
+
+  <div id="output">
+    <h3>Result</h3>
+    <pre id="result">(Result will appear here)</pre>
+  </div>
+
+<script>
+// Utilities
+function base64ToArrayBuffer(base64) {
+  const bin = atob(base64.replace(/\s+/g, ''));
+  const len = bin.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes.buffer;
+}
+function hexPairsToBytes(str) {
+  if (!str) return null;
+  str = str.trim();
+  if (str.toLowerCase() === 'zeros') return new Uint8Array(16);
+  str = str.replace(/:/g, '').replace(/\s+/g,'');
+  if (str.length % 2 !== 0) return null;
+  const out = new Uint8Array(str.length/2);
+  for (let i=0;i<out.length;i++) out[i]=parseInt(str.substr(i*2,2),16);
+  return out;
+}
+
+async function importAesKeyFromBase64(b64) {
+  const raw = new Uint8Array(base64ToArrayBuffer(b64));
+  return crypto.subtle.importKey('raw', raw, {name:'AES-CBC'}, false, ['decrypt']);
+}
+
+async function decryptAesCbc(keyObj, ivBytes, cipherBuffer) {
+  return crypto.subtle.decrypt({name:'AES-CBC', iv: ivBytes}, keyObj, cipherBuffer);
+}
+
+function sliceFromOffset(u8arr, offset) {
+  if (offset < 0) offset = 0;
+  if (offset > u8arr.length) return new Uint8Array(0);
+  return u8arr.slice(offset);
+}
+
+function decodeUtf8(u8) {
+  try {
+    return new TextDecoder('utf-8', {fatal:false}).decode(u8);
+  } catch(e) {
+    return null;
+  }
+}
+
+// DOM
+const fileInput = document.getElementById('file');
+const keyInput = document.getElementById('key');
+const ivInput = document.getElementById('iv');
+const status = document.getElementById('status');
+const resultPre = document.getElementById('result');
+const importantValues = document.getElementById('importantValues');
+const launcherIdSpan = document.getElementById('launcherId');
+const platAppSpan = document.getElementById('platApp');
+
+async function runDecrypt(file) {
+  status.textContent=''; resultPre.textContent='(Working...)';
+  importantValues.style.display = "none"; // reset
+  launcherIdSpan.textContent = "";
+  platAppSpan.textContent = "";
+
+  if (!file) { status.innerHTML = '<span class="err">Please select a file</span>'; resultPre.textContent=''; return; }
+
+  const keyB64 = keyInput.value.trim();
+  if (!keyB64) { status.innerHTML = '<span class="err">Key is empty</span>'; resultPre.textContent=''; return; }
+
+  let ivBytes = hexPairsToBytes(ivInput.value);
+  if (!ivBytes) { status.innerHTML = '<span class="err">Invalid IV format. Use colon-separated 16 bytes or "zeros".</span>'; resultPre.textContent=''; return; }
+  if (ivBytes.length !== 16) { status.innerHTML = '<span class="err">IV must be 16 bytes.</span>'; resultPre.textContent=''; return; }
+
+  const arrBuf = await file.arrayBuffer();
+
+  let keyObj;
+  try {
+    keyObj = await importAesKeyFromBase64(keyB64);
+  } catch(e) {
+    status.innerHTML = '<span class="err">Key import failed: '+(e.message||e)+'</span>';
+    resultPre.textContent='';
+    return;
+  }
+
+  let plainBytes;
+  try {
+    const plain = await decryptAesCbc(keyObj, ivBytes, arrBuf);
+    plainBytes = new Uint8Array(plain);
+  } catch(e) {
+    status.innerHTML = '<span class="err">Decryption failed: '+(e.message||e)+'</span>';
+    resultPre.textContent='';
+    return;
+  }
+
+  const OFFSET = 0x110;
+  const sliced = sliceFromOffset(plainBytes, OFFSET);
+
+  const decoded = decodeUtf8(sliced);
+  if (decoded === null) {
+    status.innerHTML = '<span class="err">UTF-8 decoding failed</span>';
+    resultPre.textContent='(Bytes could not be decoded as UTF-8)';
+    return;
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(decoded);
+  } catch(e) {
+    status.innerHTML = '<span class="err">JSON parse failed: '+(e.message||e)+'</span>';
+    resultPre.textContent = decoded.slice(0,1000) + '\n\n(Output truncated because data is not valid JSON)';
+    return;
+  }
+
+  // Extract and show values
+  try {
+    const launcherId = parsed?.App?.LauncherId ?? "(not found)";
+    const platApp = parsed?.Launcher?.PlatApp ?? "(not found)";
+    launcherIdSpan.textContent = launcherId;
+    platAppSpan.textContent = platApp;
+    importantValues.style.display = "block";
+  } catch (e) {
+    console.error("Value extraction failed", e);
+  }
+
+  const pretty = JSON.stringify(parsed, null, 2);
+  resultPre.textContent = pretty;
+  status.innerHTML = '<span class="ok">Done: JSON parsed successfully</span>';
+}
+
+// Auto-run when file is chosen
+fileInput.addEventListener('change', (e)=>{
+  if (e.target.files.length > 0) runDecrypt(e.target.files[0]);
+});
+</script>
+</body>
+</html>
