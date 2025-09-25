@@ -39,7 +39,6 @@
   <div id="importantValues" style="display:none;">
     <h2>Extracted Values</h2>
     <p>LauncherId: <span id="launcherId"></span></p>
-    <p>PlatApp: <span id="platApp"></span></p>
   </div>
 
   <div id="output">
@@ -98,13 +97,11 @@ const status = document.getElementById('status');
 const resultPre = document.getElementById('result');
 const importantValues = document.getElementById('importantValues');
 const launcherIdSpan = document.getElementById('launcherId');
-const platAppSpan = document.getElementById('platApp');
 
 async function runDecrypt(file) {
   status.textContent=''; resultPre.textContent='(Working...)';
   importantValues.style.display = "none"; // reset
   launcherIdSpan.textContent = "";
-  platAppSpan.textContent = "";
 
   if (!file) { status.innerHTML = '<span class="err">Please select a file</span>'; resultPre.textContent=''; return; }
 
@@ -158,9 +155,7 @@ async function runDecrypt(file) {
   // Extract and show values
   try {
     const launcherId = parsed?.App?.LauncherId ?? "(not found)";
-    const platApp = parsed?.Launcher?.PlatApp ?? "(not found)";
     launcherIdSpan.textContent = launcherId;
-    platAppSpan.textContent = platApp;
     importantValues.style.display = "block";
   } catch (e) {
     console.error("Value extraction failed", e);
