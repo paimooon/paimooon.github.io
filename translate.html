@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: D13751690_A13751690_L13140541 (2026-01-21)</i></label>
+        <label><i>Current version: D14444767_A14445422_L14426419 (2026-03-27)</i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -92,15 +92,27 @@
 
         function loadJSON() {
             langs.forEach(lang => {
-                fetch(`./3.8/TextMap${lang}.json`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Process the JSON object here
-                        saveData(data, lang);
+                if (lang === 'KR') {
+                    Promise.all([
+                        fetch(`./4.1/TextMapKR_0.json`).then(response => response.json()),
+                        fetch(`./4.1/TextMapKR_1.json`).then(response => response.json())
+                    ])
+                    .then(([data0, data1]) => {
+                        saveData(Object.assign({}, data0, data1), lang);
                     })
                     .catch(error => {
                         console.error('Error fetching JSON:', error);
                     });
+                } else {
+                    fetch(`./4.1/TextMap${lang}.json`)
+                        .then(response => response.json())
+                        .then(data => {
+                            saveData(data, lang);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching JSON:', error);
+                        });
+                }
             });
         }
         
