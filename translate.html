@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: D14444767_A14445422_L14426419 (2026-03-27)</i></label>
+        <label><i>Current version: <span id="version">loading...</span></i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -84,36 +84,44 @@
 
     <script>
         const langs = ["EN", "CHS", "KR", "JP"];
+        const REPO = "DimbreathBot/TurnBasedGameData";
+        const BRANCH = "main";
+        const TEXTMAP_DIR = "TextMap";
         var textmap = {};
 
         function saveData(data, lang) {
             textmap[lang] = data;
         }
 
-        function loadJSON() {
-            langs.forEach(lang => {
-                if (lang === 'KR') {
-                    Promise.all([
-                        fetch(`./4.1/TextMapKR_0.json`).then(response => response.json()),
-                        fetch(`./4.1/TextMapKR_1.json`).then(response => response.json())
-                    ])
-                    .then(([data0, data1]) => {
-                        saveData(Object.assign({}, data0, data1), lang);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching JSON:', error);
-                    });
-                } else {
-                    fetch(`./4.1/TextMap${lang}.json`)
-                        .then(response => response.json())
-                        .then(data => {
-                            saveData(data, lang);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching JSON:', error);
-                        });
-                }
-            });
+        async function loadVersion() {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${REPO}/commits/${BRANCH}`);
+                const data = await res.json();
+                document.getElementById('version').textContent = data.commit.message.split('\n')[0];
+            } catch (e) {
+                document.getElementById('version').textContent = 'unknown';
+                console.error('Error fetching commit:', e);
+            }
+        }
+
+        async function loadJSON() {
+            try {
+                const listRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${TEXTMAP_DIR}?ref=${BRANCH}`);
+                const files = await listRes.json();
+
+                await Promise.all(langs.map(async lang => {
+                    const re = new RegExp(`^TextMap${lang}(_\\d+)?\\.json$`);
+                    const matched = files
+                        .filter(f => re.test(f.name))
+                        .sort((a, b) => a.name.localeCompare(b.name));
+                    const parts = await Promise.all(
+                        matched.map(f => fetch(f.download_url).then(r => r.json()))
+                    );
+                    saveData(Object.assign({}, ...parts), lang);
+                }));
+            } catch (e) {
+                console.error('Error fetching JSON:', e);
+            }
         }
         
         function processInput(inputText, outputArray) {
@@ -170,7 +178,10 @@
         }
 
         // Load JSON when the page is ready
-        document.addEventListener('DOMContentLoaded', loadJSON);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVersion();
+            loadJSON();
+        });
     </script>
 </body>
 </html>

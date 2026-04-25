@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <label><i>Current version: 2.6.14 (2025-08-29)</i></label>
+        <label><i>Current version: <span id="version">loading...</span></i></label>
 
         <input type="text" id="input-text" placeholder="Enter Text and Press Enter" onkeydown="handleKeyDown(event)">
         
@@ -85,24 +85,56 @@
 
     <script>
         const langs = ["en", "ko", "zh", "ja"];
-        var textmap = {};
+        const langPath = { en: "en", ko: "ko", zh: "zh-Hans", ja: "ja" };
+        const REPO = "Arikatsu/WutheringWaves_Data";
+        var textmap = Object.fromEntries(langs.map(l => [l, {}]));
 
         function saveData(data, lang) {
             textmap[lang] = data;
         }
 
-        function loadJSON() {
-            langs.forEach(lang => {
-                fetch(`./ww/MultiText_${lang}.json`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Process the JSON object here
-                        saveData(data, lang);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching JSON:', error);
-                    });
-            });
+        async function pickLatestBranch() {
+            const res = await fetch(`https://api.github.com/repos/${REPO}/branches?per_page=100`);
+            const branches = await res.json();
+            return branches
+                .map(b => b.name)
+                .filter(n => /^\d+\.\d+$/.test(n))
+                .sort((a, b) => {
+                    const [am, an] = a.split('.').map(Number);
+                    const [bm, bn] = b.split('.').map(Number);
+                    return am - bm || an - bn;
+                })
+                .pop();
+        }
+
+        async function fetchMultiText(branch, langDir, subfolder) {
+            const url = `https://raw.githubusercontent.com/${REPO}/${branch}/Textmaps/${langDir}/${subfolder}/MultiText.json`;
+            const res = await fetch(url);
+            if (!res.ok) return {};
+            const arr = await res.json();
+            const map = {};
+            for (const item of arr) map[item.Id] = item.Content;
+            return map;
+        }
+
+        async function loadJSON() {
+            try {
+                const branch = await pickLatestBranch();
+                document.getElementById('version').textContent = branch || 'unknown';
+                if (!branch) return;
+                await Promise.all(langs.map(async lang => {
+                    const dir = langPath[lang];
+                    const [base, half1, half2] = await Promise.all([
+                        fetchMultiText(branch, dir, 'multi_text'),
+                        fetchMultiText(branch, dir, 'multi_text_1sthalf'),
+                        fetchMultiText(branch, dir, 'multi_text_2ndhalf'),
+                    ]);
+                    saveData(Object.assign({}, base, half1, half2), lang);
+                }));
+            } catch (e) {
+                document.getElementById('version').textContent = 'unknown';
+                console.error('Error fetching JSON:', e);
+            }
         }
         
         function processInput(inputText, outputArray) {
